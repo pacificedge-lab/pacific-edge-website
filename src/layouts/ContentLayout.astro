@@ -1,0 +1,22 @@
+---
+import BaseLayout from './BaseLayout.astro';
+interface Props {
+  title: string;
+  description: string;
+  eyebrow?: string;
+  meta?: string;
+}
+const { title, description, eyebrow, meta } = Astro.props;
+---
+
+<BaseLayout title={`${title} | Pacific Edge`} description={description}>
+  <article class="content-page shell">
+    <header class="content-hero">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      {meta && <p class="entry-meta">{meta}</p>}
+    </header>
+    <div class="prose"><slot /></div>
+  </article>
+</BaseLayout>

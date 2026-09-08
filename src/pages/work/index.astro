@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntryCard from '../../components/EntryCard.astro';
+import { sortByOrder, visible } from '../../lib/content';
+const entries = sortByOrder((await getCollection('work')).filter(visible));
+---
+<BaseLayout title="Work | Pacific Edge" description="Selected examples of Pacific Edge work on difficult organizational and systems problems.">
+  <section class="page-intro shell"><p class="eyebrow">Work</p><h1>Selected examples of how we approach difficult problems.</h1><p class="lede">Enough to show how we think. Not everything we've ever done.</p></section>
+  <section class="section section--work"><div class="shell listing-grid listing-grid--dark">
+    {entries.map((entry) => <EntryCard tone="dark" eyebrow={entry.data.domains.join(' · ')} title={entry.data.title} summary={entry.data.summary} href={`/work/${entry.id}`} />)}
+  </div></section>
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const capabilities = [
+  ['Strategy & Decision Support', 'Make difficult situations intelligible and establish coherent choices.'],
+  ['Operating Systems & Transformation', 'Turn strategy into processes, structures, workflows and sustained execution.'],
+  ['Technology & AI', 'Apply technology where it improves the system rather than simply adding another layer.'],
+  ['Organizational Capability', 'Build the knowledge, tools and practices required for lasting performance.'],
+];
+---
+<BaseLayout title="Capabilities | Pacific Edge" description="Pacific Edge works across strategy, operating systems, technology and organizational capability.">
+  <section class="page-intro shell">
+    <p class="eyebrow">Capabilities</p>
+    <h1>Complex problems rarely fit inside a single discipline.</h1>
+    <p class="lede">The problem should define the approach—not the org chart.</p>
+  </section>
+  <section class="section section--light">
+    <div class="shell capability-list">
+      {capabilities.map(([title, summary], index) => (
+        <article>
+          <span class="index">0{index + 1}</span>
+          <div><h2>{title}</h2><p>{summary}</p></div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
