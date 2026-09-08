@@ -9,19 +9,19 @@ const links = [
 ];
 ---
 
-<header class="site-header">
+<header class:list={['site-header', { 'site-header--light': pathname !== '/' }]}>
   <div class="shell header-inner">
     <a class="wordmark" href="/" aria-label="Pacific Edge home">PACIFIC EDGE</a>
     <nav class="desktop-nav" aria-label="Primary navigation">
       {links.map(([label, href]) => (
-        <a class:list={{ active: pathname.startsWith(href) }} href={href}>{label}</a>
+        <a class:list={{ active: pathname.startsWith(href) }} aria-current={pathname.startsWith(href) ? 'page' : undefined} href={href}>{label}</a>
       ))}
       <a class="contact-link" href="/contact">Contact</a>
     </nav>
     <details class="mobile-menu">
-      <summary aria-label="Open navigation">Menu</summary>
+      <summary>Menu</summary>
       <nav aria-label="Mobile navigation">
-        {links.map(([label, href]) => <a href={href}>{label}</a>)}
+        {links.map(([label, href]) => <a href={href} aria-current={pathname.startsWith(href) ? 'page' : undefined}>{label}</a>)}
         <a href="/contact">Start a conversation →</a>
       </nav>
     </details>
