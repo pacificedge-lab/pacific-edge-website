@@ -1,119 +1,97 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import EntryCard from '../components/EntryCard.astro';
-import SectionHeading from '../components/SectionHeading.astro';
 import { sortByOrder, titleFromKind, visible } from '../lib/content';
+import '../styles/home.css';
 
 const work = sortByOrder((await getCollection('work')).filter(visible).filter((e) => e.data.featured)).slice(0, 3);
 const labs = sortByOrder((await getCollection('labs')).filter(visible).filter((e) => e.data.featured)).slice(0, 3);
 const ideas = sortByOrder((await getCollection('ideas')).filter(visible).filter((e) => e.data.featured)).slice(0, 3);
-const partners = sortByOrder((await getCollection('partners')).filter(visible).filter((e) => e.data.publish && e.data.featured));
-
+// Partner approval is explicit, including in development previews.
+const partners = sortByOrder((await getCollection('partners')).filter((e) => e.data.status === 'published' && e.data.publish && e.data.featured));
+const sectionOrder = ['approach', ...(work.length ? ['work'] : []), 'capabilities', ...(labs.length ? ['labs'] : []), ...(ideas.length ? ['ideas'] : [])];
+const sectionNumber = (name: string) => String(sectionOrder.indexOf(name) + 1).padStart(2, '0');
 const capabilities = [
   ['Strategy & Decision Support', 'Make difficult situations intelligible and establish coherent choices.'],
   ['Operating Systems & Transformation', 'Turn decisions into processes, structures and operating capability.'],
-  ['Technology & AI', 'Use technology where it improves the system rather than simply adding another layer.'],
+  ['Technology & AI', 'Connect technology to the workflows, decisions and people it needs to support.'],
   ['Organizational Capability', 'Create the knowledge, tools and practices required for sustained execution.'],
 ];
 ---
 
 <BaseLayout>
-  <section class="hero hero--dark">
-    <div class="shell hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">Understand · Design · Build</p>
-        <h1>Clarity at the edge of complexity.</h1>
-        <p>Pacific Edge helps organizations understand difficult problems, make better decisions, and build the systems required to act on them.</p>
-        <div class="hero-links">
-          <a class="text-link text-link--inverse" href="/contact">What are you working on? →</a>
-          <a class="text-link text-link--muted" href="/work">Explore our work →</a>
+  <div class="homepage">
+    <section class="home-hero" aria-labelledby="hero-title">
+      <div class="shell hero-composition">
+        <div class="hero-editorial">
+          <p class="kicker">Understand · Design · Build</p>
+          <h1 id="hero-title">Clarity at the edge<br class="desktop-break" /> of complexity.</h1>
+          <p class="hero-proposition">Pacific Edge helps organizations understand difficult problems, make better decisions, and build the systems required to act on them.</p>
+          <div class="hero-actions">
+            <a class="invitation" href="/contact">What are you working on? <span aria-hidden="true">↗</span></a>
+            {work.length > 0 && <a class="quiet-link" href="#selected-work">Explore our work <span aria-hidden="true">↓</span></a>}
+          </div>
         </div>
+        <figure class="coastal-frame">
+          <img src="/images/pacific-coast.webp" srcset="/images/pacific-coast-768.webp 768w, /images/pacific-coast.webp 1536w" sizes="(max-width: 760px) 100vw, 55vw" width="1536" height="1024" alt="" fetchpriority="high" decoding="async" />
+        </figure>
+        <div class="hero-footnote" aria-hidden="true"><span>Strategy, systems & implementation</span><span>Based in Vancouver · Working across boundaries</span></div>
       </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="horizon"></div>
-        <div class="topography"></div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section section--light">
-    <div class="shell">
-      <SectionHeading title="We work from understanding to action." intro="Difficult problems rarely arrive neatly labelled. We move across strategy, operations, technology and implementation to find what actually matters." />
-      <div class="three-step">
-        <article><span class="index">01</span><h3>Understand</h3><p>See the bigger picture. Clarify what matters.</p></article>
-        <article><span class="index">02</span><h3>Design</h3><p>Create practical pathways for change.</p></article>
-        <article><span class="index">03</span><h3>Build</h3><p>Turn insight into real-world capability.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--work">
-    <div class="shell">
-      <SectionHeading eyebrow="Selected Work" title="A few things worth showing." />
-      <div class="feature-grid">
-        {work.map((entry, i) => <EntryCard tone="dark" eyebrow={entry.data.domains.join(' · ')} title={entry.data.title} summary={entry.data.summary} href={`/work/${entry.id}`} meta={i === 0 ? 'Featured' : undefined} />)}
-      </div>
-      <a class="text-link text-link--inverse section-link" href="/work">Explore more work →</a>
-    </div>
-  </section>
-
-  <section class="section section--light">
-    <div class="shell">
-      <SectionHeading title="Complex problems rarely fit inside a single discipline." intro="The problem should define the approach—not the org chart." />
-      <div class="capability-list">
-        {capabilities.map(([title, summary], index) => (
-          <article><span class="index">0{index + 1}</span><div><h3>{title}</h3><p>{summary}</p></div></article>
-        ))}
-      </div>
-      <a class="text-link section-link" href="/capabilities">Explore our capabilities →</a>
-    </div>
-  </section>
-
-  <section class="section section--labs">
-    <div class="shell">
-      <SectionHeading eyebrow="Pacific Edge Labs" title="We build things when the problem calls for something that doesn't exist yet." intro="Applied systems, operational tools and prototypes developed from real problems." />
-      <div class="listing-grid listing-grid--dark">
-        {labs.map((entry) => <EntryCard tone="dark" eyebrow={`${entry.data.projectType.replace('-', ' ')} · ${entry.data.developmentStatus}`} title={entry.data.title} summary={entry.data.summary} href={`/labs/${entry.id}`} />)}
-      </div>
-      <a class="text-link text-link--inverse section-link" href="/labs">Explore Labs →</a>
-    </div>
-  </section>
-
-  <section class="section section--ideas">
-    <div class="shell">
-      <SectionHeading eyebrow="Ideas" title="Ideas worth preserving." intro="Field notes, frameworks and research on the systems shaping how organizations work." />
-      <div class="listing-grid">
-        {ideas.map((entry) => <EntryCard eyebrow={titleFromKind(entry.data.kind)} title={entry.data.title} summary={entry.data.summary} href={`/ideas/${entry.id}`} />)}
-      </div>
-      <a class="text-link section-link" href="/ideas">Explore Ideas →</a>
-    </div>
-  </section>
-
-  {partners.length > 0 && (
-    <section class="section section--partners">
+    <section class="home-section approach" aria-labelledby="approach-title">
       <div class="shell">
-        <SectionHeading eyebrow="Partners" title="Better work is often collaborative." intro="Pacific Edge works with a carefully selected network of partners where complementary expertise improves the outcome." />
-        <div class="partner-list">
-          {partners.map((partner) => <article><h3>{partner.data.name}</h3><p>{partner.data.summary}</p></article>)}
+        <div class="editorial-heading"><p class="kicker">01 / Our approach</p><div><h2 id="approach-title">We work from<br /> understanding to action.</h2><p>Difficult problems rarely arrive neatly labelled. We move across strategy, operations, technology and implementation to find what actually matters.</p></div></div>
+        <div class="approach-steps">
+          <article><span class="step-number">01</span><h3>Understand</h3><p>See the bigger picture.<br />Clarify what matters.</p></article>
+          <article><span class="step-number">02</span><h3>Design</h3><p>Create practical pathways<br />for change.</p></article>
+          <article><span class="step-number">03</span><h3>Build</h3><p>Turn insight into<br />real-world capability.</p></article>
         </div>
       </div>
     </section>
-  )}
 
-  <section class="institutional-pause">
-    <div class="shell narrow">
-      <p class="eyebrow">Pacific Edge</p>
-      <p class="display-statement">We work across disciplines because difficult problems rarely respect organizational boundaries.</p>
-      <a class="text-link" href="/about">How we work →</a>
-    </div>
-  </section>
+    {work.length > 0 && <section class="home-section selected-work" id="selected-work" aria-labelledby="work-title">
+      <div class="shell">
+        <div class="section-masthead"><div><p class="kicker">02 / Selected work</p><h2 id="work-title">From complexity,<br />something useful.</h2></div><a class="quiet-link" href="/work">Explore our work <span aria-hidden="true">↗</span></a></div>
+        <div class="work-composition">
+          {work.map((entry, i) => <article class:list={['work-story', { 'work-story--lead': i === 0 }]}>
+            {entry.id === 'operational-evidence-system' && i === 0 && <figure class="evidence-figure" aria-label="Conceptual operating model: activity connects to evidence, decisions and continuity.">
+              <figcaption><span>Operational evidence</span><span>Conceptual model / 01</span></figcaption>
+              <div class="evidence-model" aria-hidden="true"><span>Activity<small>The work people do</small></span><span>Evidence<small>What the work tells us</small></span><span>Decisions<small>What happens next</small></span></div>
+              <div class="evidence-continuity" aria-hidden="true">Ownership & continuity</div>
+            </figure>}
+            <p class="story-meta">{entry.data.domains.join(' / ')}</p>
+            <h3><a href={`/work/${entry.id}`}>{entry.data.title}<span class="story-arrow" aria-hidden="true">↗</span></a></h3>
+            <p class="story-summary">{entry.data.summary}</p>
+          </article>)}
+        </div>
+      </div>
+    </section>}
 
-  <section class="closing-cta">
-    <div class="shell narrow">
-      <h2>What are you working on?</h2>
-      <p>If you're dealing with something complicated, consequential, or difficult to fit neatly into a box, we'd be interested to hear about it.</p>
-      <a class="text-link text-link--inverse" href="/contact">Start a conversation →</a>
-    </div>
-  </section>
+    <section class="home-section home-capabilities" aria-labelledby="capabilities-title">
+      <div class="shell capabilities-composition">
+        <div class="capabilities-intro"><p class="kicker">{sectionNumber('capabilities')} / Capabilities</p><h2 id="capabilities-title">Complex problems rarely fit inside a single discipline.</h2><a class="quiet-link" href="/capabilities">Explore our capabilities <span aria-hidden="true">↗</span></a></div>
+        <div class="home-capability-list">{capabilities.map(([title, summary], i) => <article><span class="step-number">0{i + 1}</span><div><h3>{title}</h3><p>{summary}</p></div></article>)}</div>
+      </div>
+    </section>
+
+    {labs.length > 0 && <section class="home-section home-labs" aria-labelledby="labs-title">
+      <div class="shell">
+        <div class="labs-heading"><div><p class="kicker">{sectionNumber('labs')} / Applied exploration</p><h2 id="labs-title">Pacific Edge <em>Labs</em></h2></div><p>We build things when the problem calls for something that does not exist yet.</p></div>
+        <div class="lab-index">{labs.map((entry, i) => <article class="lab-row"><span class="lab-number" aria-hidden="true">L / 0{i + 1}</span><div><p class="lab-meta">{entry.data.projectType.replaceAll('-', ' ')} <span> / {entry.data.developmentStatus}</span></p><h3><a href={`/labs/${entry.id}`}>{entry.data.title}<span aria-hidden="true">↗</span></a></h3><p class="lab-summary">{entry.data.summary}</p></div></article>)}</div>
+        <a class="quiet-link" href="/labs">Explore Labs <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>}
+
+    {ideas.length > 0 && <section class="home-section home-ideas" aria-labelledby="ideas-title">
+      <div class="shell">
+        <div class="section-masthead"><div><p class="kicker">{sectionNumber('ideas')} / Ideas</p><h2 id="ideas-title">Ideas worth preserving.</h2></div><a class="quiet-link" href="/ideas">Explore Ideas <span aria-hidden="true">↗</span></a></div>
+        <div class="ideas-shelf">{ideas.map((entry) => <article><p class="kicker">{titleFromKind(entry.data.kind)}</p><h3><a href={`/ideas/${entry.id}`}>{entry.data.title}</a></h3><p>{entry.data.summary}</p><a class="quiet-link" href={`/ideas/${entry.id}`} aria-label={`Read ${entry.data.title}`}>Read {titleFromKind(entry.data.kind).toLowerCase()} <span aria-hidden="true">↗</span></a></article>)}</div>
+      </div>
+    </section>}
+
+    {partners.length > 0 && <section class="home-section home-partners" aria-labelledby="partners-title"><div class="shell"><p class="kicker">Partners</p><h2 id="partners-title">Better work is often collaborative.</h2><div class="partner-list">{partners.map((partner) => <article><h3>{partner.data.name}</h3><p>{partner.data.summary}</p></article>)}</div></div></section>}
+
+    <section class="home-closing" aria-labelledby="closing-title"><div class="shell closing-composition"><p class="kicker">A conversation is a good place to start.</p><h2 id="closing-title">What are you<br /> working on?</h2><div class="closing-note"><p>If you're dealing with something complicated, consequential, or difficult to fit neatly into a box, we'd be interested to hear about it.</p><a class="invitation" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a></div></div></section>
+  </div>
 </BaseLayout>

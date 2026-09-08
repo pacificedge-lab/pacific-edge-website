@@ -39,7 +39,7 @@
 
 * { box-sizing: border-box; }
 html { background: var(--background-primary); color: var(--text-primary); font-family: var(--font-interface); scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; background: var(--background-primary); }
+body { margin: 0; background: var(--background-primary); }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 p { line-height: 1.65; }
 h1, h2, h3, p { margin-top: 0; }
@@ -57,6 +57,8 @@ h3 { font-size: clamp(1.35rem, 2vw, 1.8rem); line-height: 1.15; }
 .text-link--inverse { color: var(--text-inverse); }
 .text-link--muted { color: var(--pe-taupe); }
 .site-header { position: absolute; width: 100%; z-index: 10; color: var(--text-inverse); }
+.site-header--light { color: var(--text-primary); }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
 .header-inner { height: 84px; display: flex; align-items: center; justify-content: space-between; }
 .wordmark { text-decoration: none; font-weight: 680; letter-spacing: .12em; font-size: .86rem; }
 .desktop-nav { display: flex; align-items: center; gap: 1.8rem; font-size: .9rem; }
@@ -138,10 +140,10 @@ button { justify-self: start; font: inherit; background: var(--pe-abyss); color:
   :root { --shell: min(100% - 32px, 1240px); --narrow: min(100% - 32px, 820px); --space-8: 7rem; }
   .desktop-nav { display: none; }
   .mobile-menu { display: block; position: relative; }
-  .mobile-menu summary { list-style: none; cursor: pointer; font-size: .9rem; }
+  .mobile-menu summary { list-style: none; cursor: pointer; font-size: .9rem; min-height: 44px; display: flex; align-items: center; }
   .mobile-menu summary::-webkit-details-marker { display: none; }
-  .mobile-menu nav { position: absolute; right: 0; top: 2rem; min-width: 240px; background: var(--pe-mineral); color: var(--pe-abyss); padding: 1.5rem; display: grid; gap: 1rem; box-shadow: 0 15px 45px rgba(0,0,0,.18); }
-  .mobile-menu nav a { text-decoration: none; }
+  .mobile-menu nav { position: absolute; right: 0; top: calc(100% + 8px); min-width: 240px; background: var(--pe-mineral); color: var(--pe-abyss); padding: 1.5rem; display: grid; gap: 1rem; box-shadow: 0 15px 45px rgba(0,0,0,.18); }
+  .mobile-menu nav a { text-decoration: none; min-height: 32px; display: flex; align-items: center; }
   .hero { min-height: auto; padding: 9rem 0 6rem; }
   .hero-grid { grid-template-columns: 1fr; gap: 4rem; padding-top: 1rem; }
   .hero-visual { min-height: 240px; }
