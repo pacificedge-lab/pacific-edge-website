@@ -1,0 +1,29 @@
+---
+const pathname = Astro.url.pathname;
+const links = [
+  ['Work', '/work'],
+  ['Capabilities', '/capabilities'],
+  ['Labs', '/labs'],
+  ['Ideas', '/ideas'],
+  ['About', '/about'],
+];
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="wordmark" href="/" aria-label="Pacific Edge home">PACIFIC EDGE</a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {links.map(([label, href]) => (
+        <a class:list={{ active: pathname.startsWith(href) }} href={href}>{label}</a>
+      ))}
+      <a class="contact-link" href="/contact">Contact</a>
+    </nav>
+    <details class="mobile-menu">
+      <summary aria-label="Open navigation">Menu</summary>
+      <nav aria-label="Mobile navigation">
+        {links.map(([label, href]) => <a href={href}>{label}</a>)}
+        <a href="/contact">Start a conversation →</a>
+      </nav>
+    </details>
+  </div>
+</header>

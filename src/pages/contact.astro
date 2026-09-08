@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
+const enabled = Boolean(endpoint);
+---
+<BaseLayout title="Contact | Pacific Edge" description="Tell Pacific Edge what you're working on.">
+  <section class="page-intro shell contact-intro">
+    <p class="eyebrow">Contact</p>
+    <h1>What are you working on?</h1>
+    <p class="lede">Tell us a little about what is happening. You do not need to know what kind of consulting engagement you need.</p>
+  </section>
+  <section class="section section--light">
+    <div class="shell form-shell">
+      {enabled ? (
+        <form action={endpoint} method="post">
+          <label>Name<input type="text" name="name" required autocomplete="name" /></label>
+          <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+          <label>Organization <span>(optional)</span><input type="text" name="organization" autocomplete="organization" /></label>
+          <label>What are you working on?<textarea name="message" rows="8" required></textarea></label>
+          <button type="submit">Start the conversation →</button>
+        </form>
+      ) : (
+        <div class="form-disabled">
+          <p class="eyebrow">Contact endpoint not yet configured</p>
+          <p>The public form will be enabled when the secure submission endpoint is connected.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

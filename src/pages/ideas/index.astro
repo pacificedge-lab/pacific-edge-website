@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntryCard from '../../components/EntryCard.astro';
+import { sortByOrder, titleFromKind, visible } from '../../lib/content';
+const entries = sortByOrder((await getCollection('ideas')).filter(visible));
+---
+<BaseLayout title="Ideas | Pacific Edge" description="Field notes, frameworks and research from Pacific Edge.">
+  <section class="page-intro shell"><p class="eyebrow">Ideas</p><h1>Ideas worth preserving.</h1><p class="lede">Field notes, frameworks and research on the systems shaping how organizations work.</p></section>
+  <section class="section section--light"><div class="shell listing-grid">
+    {entries.map((entry) => <EntryCard eyebrow={titleFromKind(entry.data.kind)} title={entry.data.title} summary={entry.data.summary} href={`/ideas/${entry.id}`} />)}
+  </div></section>
+</BaseLayout>

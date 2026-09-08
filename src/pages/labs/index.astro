@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntryCard from '../../components/EntryCard.astro';
+import { sortByOrder, visible } from '../../lib/content';
+const entries = sortByOrder((await getCollection('labs')).filter(visible));
+---
+<BaseLayout title="Labs | Pacific Edge" description="Applied systems, products and prototypes from Pacific Edge Labs.">
+  <section class="page-intro shell"><p class="eyebrow">Pacific Edge Labs</p><h1>We build things when the problem calls for something that doesn't exist yet.</h1><p class="lede">Applied systems, operational tools and prototypes developed from real problems.</p></section>
+  <section class="section section--labs"><div class="shell listing-grid listing-grid--dark">
+    {entries.map((entry) => <EntryCard tone="dark" eyebrow={`${entry.data.projectType.replace('-', ' ')} · ${entry.data.developmentStatus}`} title={entry.data.title} summary={entry.data.summary} href={`/labs/${entry.id}`} />)}
+  </div></section>
+</BaseLayout>
