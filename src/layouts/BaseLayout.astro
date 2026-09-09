@@ -9,11 +9,14 @@ interface Props {
   title?: string;
   description?: string;
   darkHeader?: boolean;
+  article?: boolean;
 }
 
 const {
   title = 'Pacific Edge | Clarity at the edge of complexity',
   description = 'Pacific Edge helps organizations understand difficult problems, make better decisions, and build the systems required to act on them.',
+  darkHeader = false,
+  article = false,
 } = Astro.props;
 ---
 
@@ -26,12 +29,12 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
     <title>{title}</title>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <SiteHeader />
+    <SiteHeader dark={darkHeader} />
     <main id="main"><slot /></main>
     <SiteFooter />
   </body>
