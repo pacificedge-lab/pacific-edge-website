@@ -1,30 +1,30 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
-const enabled = Boolean(endpoint);
+import ContactFields from '../components/ContactFields.astro';
+import { contactAction } from '../lib/publication';
+import '../styles/institution.css';
+const endpoint = contactAction(import.meta.env.PUBLIC_CONTACT_ENDPOINT, import.meta.env.PUBLIC_CONTACT_ENABLED);
 ---
 <BaseLayout title="Contact | Pacific Edge" description="Tell Pacific Edge what you're working on.">
-  <section class="page-intro shell contact-intro">
+  <div class="institution-page contact-page shell">
+  <section class="contact-intro">
     <p class="eyebrow">Contact</p>
     <h1>What are you working on?</h1>
-    <p class="lede">Tell us a little about what is happening. You do not need to know what kind of consulting engagement you need.</p>
+    <p class="lede">Tell us a little about what is happening. You do not need to have the problem neatly defined.</p>
+    <p class="contact-location">Pacific Edge<br />Vancouver, British Columbia · Canada</p>
   </section>
-  <section class="section section--light">
-    <div class="shell form-shell">
-      {enabled ? (
+  <section class="contact-surface" aria-label="Start a conversation">
+      {endpoint ? (
         <form action={endpoint} method="post">
-          <label>Name<input type="text" name="name" required autocomplete="name" /></label>
-          <label>Email<input type="email" name="email" required autocomplete="email" /></label>
-          <label>Organization <span>(optional)</span><input type="text" name="organization" autocomplete="organization" /></label>
-          <label>What are you working on?<textarea name="message" rows="8" required></textarea></label>
+          <ContactFields />
           <button type="submit">Start the conversation →</button>
         </form>
       ) : (
-        <div class="form-disabled">
-          <p class="eyebrow">Contact endpoint not yet configured</p>
-          <p>The public form will be enabled when the secure submission endpoint is connected.</p>
+        <div>
+          <p class="contact-notice" id="contact-notice">Online enquiries will be available soon. This form is not accepting submissions yet.</p>
+          <fieldset disabled aria-describedby="contact-notice"><legend>Start a conversation</legend><ContactFields /><button type="button" disabled>Start the conversation →</button></fieldset>
         </div>
       )}
-    </div>
   </section>
+  </div>
 </BaseLayout>

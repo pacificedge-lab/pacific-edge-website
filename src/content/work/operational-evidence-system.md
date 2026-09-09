@@ -4,7 +4,7 @@ summary: Turning fragmented administrative activity into a usable operational mo
 status: draft
 featured: true
 domains:
-  - Education
+  - Indigenous Education
   - Systems Design
   - Implementation
 capabilities:
@@ -14,6 +14,6 @@ confidentiality: anonymized
 order: 1
 ---
 
-A public-sector education organization needed a better way to capture activity, evidence, outcomes and accountability without creating another administrative burden.
+An Indigenous education team within a public-sector education organization needed a better way to capture activity, evidence, outcomes and accountability without creating another administrative burden.
 
 Pacific Edge designed the operating model around the actual work rather than forcing the work to conform to the software.

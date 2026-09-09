@@ -3,12 +3,13 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { sortByOrder, titleFromKind, visible } from '../lib/content';
 import '../styles/home.css';
+import { partnerPublished } from '../lib/publication';
 
 const work = sortByOrder((await getCollection('work')).filter(visible).filter((e) => e.data.featured)).slice(0, 3);
 const labs = sortByOrder((await getCollection('labs')).filter(visible).filter((e) => e.data.featured)).slice(0, 3);
 const ideas = sortByOrder((await getCollection('ideas')).filter(visible).filter((e) => e.data.featured)).slice(0, 3);
 // Partner approval is explicit, including in development previews.
-const partners = sortByOrder((await getCollection('partners')).filter((e) => e.data.status === 'published' && e.data.publish && e.data.featured));
+const partners = sortByOrder((await getCollection('partners')).filter(partnerPublished).filter((e) => e.data.featured));
 const sectionOrder = ['approach', ...(work.length ? ['work'] : []), 'capabilities', ...(labs.length ? ['labs'] : []), ...(ideas.length ? ['ideas'] : [])];
 const sectionNumber = (name: string) => String(sectionOrder.indexOf(name) + 1).padStart(2, '0');
 const capabilities = [

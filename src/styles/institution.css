@@ -1,0 +1,50 @@
+.institution-intro { padding-block: 170px 72px; }
+.institution-intro h1 { font-size: clamp(2.8rem, 5.7vw, 5.3rem); line-height: 1.08; max-width: 1120px; margin-block: 28px 36px; font-weight: 420; }
+.institution-intro .lede { max-width: 740px; }
+.institution-section { padding-block: 80px; }
+.institution-copy { display: grid; grid-template-columns: 1fr 1.6fr; gap: 100px; border-top: 1px solid var(--pe-mist); padding-top: 40px; }
+.institution-copy h2 { font-size: clamp(2.25rem, 4vw, 3.75rem); }
+.institution-copy p { max-width: 650px; font-size: 1.125rem; color: var(--pe-slate); }
+.institution-dark { background: var(--pe-abyss); color: var(--pe-mineral); padding-block: 96px; }
+.institution-dark .eyebrow { color: var(--pe-mist); }
+.institution-dark h2 { font-size: clamp(2.5rem, 4.5vw, 4.3rem); line-height: 1.1; margin-block: 28px 56px; }
+.practice-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.practice-pair article { border-top: 1px solid #586164; padding-top: 24px; }
+.practice-pair span { text-transform: uppercase; letter-spacing: .1em; font-size: .75rem; color: var(--pe-mist); }
+.practice-pair h3 { font: 450 clamp(1.8rem, 3vw, 2.5rem)/1.15 var(--font-editorial); margin-block: 30px 20px; }
+.practice-pair p { color: var(--pe-mist); max-width: 480px; }
+.practice-pair a { display: inline-block; margin-top: 20px; font-size: .875rem; padding-block: 8px; }
+.contact-page { padding-block: 170px 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
+.contact-intro h1 { font-size: clamp(3.1rem, 5.5vw, 5.3rem); line-height: 1.06; margin-block: 30px; }
+.contact-intro .lede { font-size: 1.125rem; max-width: 440px; }
+.contact-location { border-top: 1px solid var(--pe-mist); margin-top: 48px; padding-top: 24px; color: var(--pe-slate); font-size: .875rem; }
+.contact-surface { padding-top: 6px; min-width: 0; }
+.contact-notice { border-top: 1px solid var(--pe-oxide); padding-top: 20px; margin-bottom: 32px; color: var(--pe-slate); font-size: .9375rem; }
+.contact-surface fieldset { margin: 0; padding: 0; border: 0; display: grid; gap: 24px; min-width: 0; }
+.contact-surface legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.contact-surface input, .contact-surface textarea { width: 100%; min-width: 0; border-color: var(--pe-taupe); }
+.contact-surface textarea { resize: vertical; }
+.contact-surface label span { color: var(--pe-slate); }
+.contact-surface label .field-title { color: var(--pe-abyss); font-weight: 600; }
+.contact-surface :disabled { opacity: 1; cursor: not-allowed; }
+.contact-surface button:disabled { background: var(--pe-slate); color: var(--pe-mineral); }
+.collection-empty { grid-column: 1 / -1; max-width: 620px; padding-block: 16px; }
+.collection-empty p { font-size: 1.125rem; }
+.collection-empty a { display: inline-block; padding-block: 8px; }
+@media (max-width: 900px) {
+  .institution-copy, .contact-page { gap: 48px; }
+  .contact-page { grid-template-columns: 1fr; max-width: 640px; }
+  .practice-pair { gap: 40px; }
+}
+@media (max-width: 640px) {
+  .institution-intro { padding-block: 125px 40px; }
+  .institution-intro h1 { font-size: clamp(2.4rem, 8vw, 3.4rem); }
+  .institution-section { padding-block: 48px; }
+  .institution-copy { grid-template-columns: 1fr; gap: 12px; padding-top: 28px; }
+  .practice-pair { grid-template-columns: 1fr; gap: 40px; }
+  .institution-dark { padding-block: 64px; }
+  .institution-dark h2 { margin-bottom: 40px; }
+  .contact-page { grid-template-columns: 1fr; gap: 36px; padding-block: 125px 64px; }
+  .contact-intro h1 { font-size: clamp(3rem, 11vw, 4rem); }
+  .contact-location { margin-top: 28px; }
+}

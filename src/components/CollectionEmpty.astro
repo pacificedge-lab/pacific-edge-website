@@ -1,0 +1,7 @@
+---
+import '../styles/institution.css';
+interface Props { kind: 'work' | 'labs' | 'ideas'; }
+const { kind } = Astro.props;
+const copy = { work: 'Selected work will be shared here as stories are ready for publication.', labs: 'Projects will be shared here as they are ready for a closer look.', ideas: 'Field notes, frameworks and essays will be shared here as they are ready.' };
+---
+<div class="collection-empty"><p>{copy[kind]}</p><a href="/contact">What are you working on? →</a></div>
