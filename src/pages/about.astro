@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { visible } from '../lib/content';
 import '../styles/institution.css';
+const indigenousWork = (await getCollection('work')).find((entry) => entry.id === 'operational-evidence-system' && visible(entry));
 ---
 <BaseLayout title="About | Pacific Edge" description="Why Pacific Edge exists and how we work.">
   <div class="institution-page about-page">
@@ -20,6 +23,16 @@ import '../styles/institution.css';
     </div>
   </section>
 
+  <section class="institution-section" id="indigenous-work" aria-labelledby="indigenous-title">
+    <div class="shell institution-copy">
+      <h2 id="indigenous-title">First Nations &amp;<br />Indigenous work</h2>
+      <div>
+        <p>Pacific Edge's experience includes operational systems work in Indigenous education: connecting day-to-day activity with evidence, ownership and continuity.</p>
+        <p>Our approach to First Nations and Indigenous work begins with the priorities, context and decisions of the people and organizations involved. Practical systems should support that work and the capacity to carry it forward.</p>
+        {indigenousWork && <a class="text-link" href={`/work/${indigenousWork.id}`}>Explore the Indigenous education work →</a>}
+      </div>
+    </div>
+  </section>
   <section class="institution-section institution-dark" aria-labelledby="practice-title">
     <div class="shell">
       <p class="eyebrow">How we work</p><h2 id="practice-title">Understanding and making<br />belong together.</h2>
