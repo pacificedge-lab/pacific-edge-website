@@ -1,7 +1,8 @@
 import type { CollectionEntry } from 'astro:content';
+import { visibleIn } from './publication';
 
-export function visible<T extends { data: { status: string } }>(entry: T) {
-  return import.meta.env.PROD ? entry.data.status === 'published' : entry.data.status !== 'archived';
+export function visible<T extends { data: { status: string; confidentiality?: string } }>(entry: T) {
+  return visibleIn(entry, import.meta.env.PROD);
 }
 
 export function sortByOrder<T extends { data: { order: number } }>(entries: T[]) {

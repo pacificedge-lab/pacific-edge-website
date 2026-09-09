@@ -21,7 +21,7 @@ for (const collection of ['work', 'labs', 'ideas']) {
   for (const name of await readdir(directory)) {
     if (!name.endsWith('.md')) continue;
     const source = await readFile(path.join(directory, name), 'utf8');
-    if (/^status: published\s*$/m.test(source)) continue;
+    if (/^status: published\s*$/m.test(source) && !/^confidentiality: internal\s*$/m.test(source)) continue;
     const slug = name.slice(0, -3);
     assert.equal(await exists(path.join(dist, collection, slug, 'index.html')), false, `Unpublished route leaked: ${collection}/${slug}`);
     assert.equal(allHtml.includes(`/${collection}/${slug}`), false, `Unpublished link leaked: ${slug}`);
@@ -41,4 +41,6 @@ const homepage = await readFile(path.join(dist, 'index.html'), 'utf8');
 assert.equal(homepage.includes('home-partners'), false, 'Partners unexpectedly published in the dormant baseline');
 const contact = await readFile(path.join(dist, 'contact/index.html'), 'utf8');
 assert.equal(/<form\b/i.test(contact), false, 'Contact form must remain disabled in the endpoint-free baseline');
+assert.ok(/<fieldset\b[^>]*\bdisabled\b/i.test(contact), 'Contact preview fields must be disabled');
+assert.ok(/<button\b[^>]*\bdisabled\b/i.test(contact), 'Contact preview button must be disabled');
 console.log(`Publication checks passed: ${unpublished} unpublished entries excluded, ${files.length} static pages, valid local links, no client scripts, dormant Partners and disabled contact.`);
