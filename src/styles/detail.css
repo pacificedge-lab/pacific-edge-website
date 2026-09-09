@@ -1,0 +1,80 @@
+.detail-page { --detail-rule: #bdbab2; }
+.detail-hero { padding-block: 140px 70px; }
+.detail-breadcrumb { display: flex; flex-wrap: wrap; align-items: baseline; gap: 16px; font-size: .875rem; color: var(--pe-slate); margin-bottom: 64px; }
+.detail-breadcrumb a { text-decoration: none; padding-block: 8px; }
+.detail-breadcrumb a:hover { text-decoration: underline; }
+.detail-label { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; line-height: 1.7; font-weight: 550; color: var(--pe-oxide); }
+.detail-hero h1 { font-size: clamp(2.8rem, 5.8vw, 5.5rem); line-height: 1.08; max-width: 1120px; font-weight: 420; margin-block: 24px 32px; text-wrap: pretty; }
+.detail-summary { max-width: 780px; color: var(--pe-slate); font-size: clamp(1.125rem, 1.7vw, 1.375rem); line-height: 1.65; margin: 0; }
+.detail-body { border-top: 1px solid var(--detail-rule); padding-block: 64px 96px; display: grid; grid-template-columns: 1fr 2.2fr; gap: 80px; }
+.detail-context dl { margin: 0; }
+.detail-context dl > div { margin-bottom: 32px; }
+.detail-context dt { font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: var(--pe-oxide); margin-bottom: 12px; }
+.detail-context dd { margin: 0; font-size: .875rem; line-height: 1.7; color: var(--pe-slate); }
+.detail-context dd span { display: block; margin-top: 6px; }
+.detail-contents { border-top: 1px solid var(--detail-rule); padding-top: 24px; margin-top: 36px; }
+.detail-contents ol { padding-left: 1.25rem; font-size: .875rem; line-height: 1.6; }
+.detail-contents li { margin-bottom: 12px; padding-left: 4px; }
+.detail-prose { min-width: 0; max-width: 730px; font-family: var(--font-editorial); font-size: clamp(1.125rem, 1.6vw, 1.3125rem); line-height: 1.8; overflow-wrap: anywhere; }
+.detail-prose > :first-child { margin-top: 0; }
+.detail-prose p { line-height: 1.8; margin-bottom: 1.5em; }
+.detail-prose h2 { font-size: clamp(1.9rem, 3vw, 2.7rem); margin-block: 2em .75em; line-height: 1.15; scroll-margin-top: 32px; }
+.detail-prose h3 { font-family: var(--font-editorial); font-weight: 500; font-size: 1.5rem; margin-block: 1.75em .75em; line-height: 1.3; }
+.detail-prose li { margin-bottom: .6em; }
+.detail-prose ul, .detail-prose ol { padding-left: 1.3em; }
+.detail-prose blockquote { border-left: 2px solid var(--pe-oxide); margin: 2em 0; padding-left: 24px; color: var(--pe-slate); }
+.detail-prose hr { border: 0; border-top: 1px solid var(--detail-rule); margin-block: 2em; }
+.detail-prose img { display: block; max-width: 100%; height: auto; }
+.detail-prose pre { padding: 24px; overflow-x: auto; font-size: .875rem; line-height: 1.7; }
+.detail-prose :not(pre) > code { font-size: .85em; background: var(--pe-mist); padding: .1em .25em; }
+.detail-prose table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; font: .9375rem/1.6 var(--font-interface); margin-block: 2em; }
+.detail-prose th, .detail-prose td { padding: 12px 16px; border-bottom: 1px solid var(--detail-rule); text-align: left; }
+.detail-prose th { background: var(--pe-mist); }
+.detail-end { margin-top: 48px; font: 600 .75rem/1 var(--font-interface); letter-spacing: .1em; color: var(--pe-oxide); }
+.detail-page--labs .detail-hero { background: var(--pe-abyss); color: var(--pe-mineral); padding-bottom: 80px; }
+.detail-page--labs .detail-hero .detail-label, .detail-page--labs .detail-summary, .detail-page--labs .detail-breadcrumb { color: var(--pe-mist); }
+.detail-page--labs .detail-body { border-top: 0; padding-top: 72px; }
+.detail-page--labs .detail-context dt { font-family: ui-monospace, Consolas, monospace; }
+.detail-page--ideas .detail-hero h1 { max-width: 950px; }
+.detail-page--ideas .detail-summary { max-width: 740px; }
+.detail-related { background: #e7e3db; padding-block: 72px 88px; }
+.detail-related-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 32px; margin-bottom: 36px; }
+.detail-related h2 { font-size: clamp(2rem, 3.5vw, 3.25rem); margin: 0; line-height: 1.15; }
+.detail-related-heading > a { flex-shrink: 0; font-size: .875rem; text-decoration: none; }
+.detail-related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.detail-related-grid article { border-top: 1px solid var(--detail-rule); padding-top: 24px; }
+.detail-related h3 { font: 450 clamp(1.6rem, 2.6vw, 2.25rem)/1.2 var(--font-editorial); max-width: 28ch; margin: 20px 0 0; }
+.detail-related h3 a { text-decoration: none; }
+.detail-related a:hover { text-decoration: underline; }
+.detail-related h3 span { font: .7em var(--font-interface); }
+.detail-invitation { background: var(--pe-abyss); color: var(--pe-mineral); padding-block: 72px; }
+.detail-invitation .shell { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+.detail-invitation h2 { font-size: clamp(2.3rem, 4.5vw, 4.25rem); margin: 0; }
+.detail-invitation a { flex-shrink: 0; text-decoration: none; border-bottom: 1px solid currentColor; padding-block: 12px; }
+.detail-invitation a span { margin-left: 28px; }
+.detail-invitation a:hover { text-decoration: underline; }
+@media (max-width: 900px) {
+  .detail-body { gap: 40px; grid-template-columns: 1fr 2fr; }
+  .detail-hero h1 { font-size: clamp(2.8rem, 6.5vw, 4rem); }
+  .detail-related-grid { gap: 32px; }
+}
+@media (max-width: 640px) {
+  .detail-hero { padding-block: 112px 40px; }
+  .detail-breadcrumb { margin-bottom: 36px; gap: 12px; }
+  .detail-hero h1 { font-size: clamp(2.25rem, 8.5vw, 3.3rem); margin-block: 20px 28px; }
+  .detail-body { grid-template-columns: 1fr; gap: 36px; padding-block: 32px 64px; }
+  .detail-context dl { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .detail-context dl > div { margin: 0; }
+  .detail-context dd { font-size: .8125rem; }
+  .detail-page--labs .detail-hero { padding-bottom: 48px; }
+  .detail-page--labs .detail-body { padding-top: 36px; }
+  .detail-prose { font-size: 1.125rem; }
+  .detail-related { padding-block: 48px 56px; }
+  .detail-related-heading { display: block; }
+  .detail-related-heading > a { display: inline-block; margin-top: 20px; padding-block: 8px; }
+  .detail-related-grid { grid-template-columns: 1fr; }
+  .detail-invitation { padding-block: 56px; }
+  .detail-invitation .shell { display: block; }
+  .detail-invitation h2 { line-height: 1.1; }
+  .detail-invitation a { display: inline-block; margin-top: 24px; }
+}

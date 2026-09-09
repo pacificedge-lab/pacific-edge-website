@@ -1,22 +1,38 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import '../styles/detail.css';
 interface Props {
   title: string;
   description: string;
-  eyebrow?: string;
-  meta?: string;
+  kind: 'work' | 'labs' | 'ideas';
+  eyebrow: string;
+  facts?: { label: string; values: string[] }[];
+  related?: { title: string; href: string; label: string }[];
+  headings?: { depth: number; slug: string; text: string }[];
 }
-const { title, description, eyebrow, meta } = Astro.props;
+const { title, description, kind, eyebrow, facts = [], related = [], headings = [] } = Astro.props;
+const collectionName = { work: 'Work', labs: 'Labs', ideas: 'Ideas' }[kind];
+const sections = headings.filter((heading) => heading.depth === 2);
 ---
 
-<BaseLayout title={`${title} | Pacific Edge`} description={description}>
-  <article class="content-page shell">
-    <header class="content-hero">
-      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-      <h1>{title}</h1>
-      <p class="lede">{description}</p>
-      {meta && <p class="entry-meta">{meta}</p>}
+<BaseLayout title={`${title} | Pacific Edge`} description={description} darkHeader={kind === 'labs'} article={kind === 'ideas'}>
+  <article class:list={['detail-page', `detail-page--${kind}`]}>
+    <header class="detail-hero">
+      <div class="shell">
+        <nav class="detail-breadcrumb" aria-label="Back to collection"><a href={`/${kind}`}><span aria-hidden="true">←</span> All {collectionName}</a></nav>
+        <p class="detail-label">{eyebrow}</p>
+        <h1>{title}</h1>
+        <p class="detail-summary">{description}</p>
+      </div>
     </header>
-    <div class="prose"><slot /></div>
+    <div class="shell detail-body">
+      <aside class="detail-context" aria-label="Article context">
+        {facts.length > 0 && <dl>{facts.filter((fact) => fact.values.length > 0).map((fact) => <div><dt>{fact.label}</dt><dd>{fact.values.map((value) => <span>{value}</span>)}</dd></div>)}</dl>}
+        {sections.length >= 3 && <nav class="detail-contents" aria-label="On this page"><p class="detail-label">On this page</p><ol>{sections.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav>}
+      </aside>
+      <div class="detail-prose"><slot /><div class="detail-end" aria-hidden="true">PE</div></div>
+    </div>
+    {related.length > 0 && <section class="detail-related" aria-labelledby="related-title"><div class="shell"><div class="detail-related-heading"><h2 id="related-title">{kind === 'ideas' ? 'Continue reading.' : kind === 'labs' ? 'More from the lab.' : 'Other problems. Shared disciplines.'}</h2><a href={`/${kind}`}>All {collectionName} <span aria-hidden="true">↗</span></a></div><div class="detail-related-grid">{related.map((entry) => <article><p class="detail-label">{entry.label}</p><h3><a href={entry.href}>{entry.title}<span aria-hidden="true"> ↗</span></a></h3></article>)}</div></div></section>}
   </article>
+  <section class="detail-invitation" aria-labelledby="detail-contact-title"><div class="shell"><h2 id="detail-contact-title">What are you working on?</h2><a href="/contact">Start a conversation <span aria-hidden="true">↗</span></a></div></section>
 </BaseLayout>
