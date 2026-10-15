@@ -1,0 +1,5 @@
+---
+interface Props{title:string;lead:string;eyebrow:string;image?:string;cta?:boolean;}
+const {title,lead,eyebrow,image='coast',cta=true}=Astro.props;
+---
+<header class="pe-inner-hero"><div class="pe-inner-opening"><p class="pe-kicker">{eyebrow}</p><h1>{title}</h1><p class="pe-lede">{lead}</p>{cta&&<a class="pe-button pe-button-light" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a>}</div><div class="pe-inner-image" style={`background-image:url('/images/${image}.jpg')`} aria-hidden="true"></div></header>

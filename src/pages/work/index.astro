@@ -1,13 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
+import {getCollection} from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import EntryCard from '../../components/EntryCard.astro';
-import { sortByOrder, visible } from '../../lib/content';
-const entries = sortByOrder((await getCollection('work')).filter(visible));
+import PageHero from '../../components/PageHero.astro';
+import ContactInvitation from '../../components/ContactInvitation.astro';
+import {isReview,visible,sortByOrder} from '../../lib/content';
+const entries=sortByOrder((await getCollection('work')).filter(visible));
 ---
-<BaseLayout title="Work | Pacific Edge" description="Selected examples of Pacific Edge work on difficult organizational and systems problems.">
-  <section class="page-intro shell"><p class="eyebrow">Work</p><h1>Selected examples of how we approach difficult problems.</h1><p class="lede">Enough to show how we think. Not everything we've ever done.</p></section>
-  <section class="section section--work"><div class="shell listing-grid listing-grid--dark">
-    {entries.map((entry) => <EntryCard tone="dark" eyebrow={entry.data.domains.join(' · ')} title={entry.data.title} summary={entry.data.summary} href={`/work/${entry.id}`} />)}
-  </div></section>
+<BaseLayout title="Selected Work — Pacific Edge" description="Explore the decisions, operational challenges and practical work behind selected assignments." noindex={!entries.length}>
+<PageHero title="Selected work" lead="Explore how important decisions connect to practical change." eyebrow="Experience" image="infrastructure"/>
+<section class="pe-section pe-shell"><div class="pe-section-heading"><h2>Judgment and delivery</h2><p>Understand the situation, the decisions and the contribution behind the work.</p></div>
+{entries.length>0?<div class="pe-projects">{entries.map(entry=><article class="pe-project"><p class="pe-kicker">{entry.data.domains.join(' / ')}</p><h3><a href={`/work/${entry.id}`}>{entry.data.title}</a></h3><p>{entry.data.summary}</p><a class="pe-text-link" href={`/work/${entry.id}`}>Read the account ↗</a></article>)}</div>:isReview?<div class="pe-projects"><div class="pe-review-note">Editorial spaces for two verified work accounts. These are placeholders for review.</div><article class="pe-project" data-case-placeholder><p class="pe-kicker">Case study to be supplied</p><h3>Strategic judgment and initiative recovery</h3><p>Document the inherited situation, diagnosis, choices, Chris's role and supported result.</p></article><article class="pe-project" data-case-placeholder><p class="pe-kicker">Case study to be supplied</p><h3>Operational and technology delivery</h3><p>Document the operational need, constraints, work undertaken and current delivery status.</p></article></div>:<p class="pe-empty">Contact Chris to discuss experience relevant to your situation.</p>}
+</section><ContactInvitation/>
 </BaseLayout>

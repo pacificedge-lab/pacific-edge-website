@@ -1,8 +1,8 @@
 ---
 title: Building an operational evidence system around the work people actually do
 summary: Turning fragmented administrative activity into a usable operational model with clearer evidence, ownership and continuity.
-status: draft
-featured: true
+status: archived
+featured: false
 domains:
   - Education
   - Systems Design

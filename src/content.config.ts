@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 const status = z.enum(['draft', 'review', 'approved', 'published', 'archived']);
@@ -26,7 +27,7 @@ const labs = defineCollection({
     featured: z.boolean().default(false),
     projectType: z.enum(['product', 'prototype', 'experiment', 'internal-system']),
     developmentStatus: z.string(),
-    github: z.string().url().optional(),
+    github: z.url().optional(),
     order: z.number().default(100),
   }),
 });
@@ -50,7 +51,7 @@ const partners = defineCollection({
     name: z.string(),
     summary: z.string(),
     relationship: z.enum(['delivery', 'technology', 'strategic']),
-    website: z.string().url().optional(),
+    website: z.url().optional(),
     status,
     publish: z.boolean().default(false),
     featured: z.boolean().default(false),
@@ -69,4 +70,8 @@ const people = defineCollection({
   }),
 });
 
-export const collections = { work, labs, ideas, partners, people };
+const pages=defineCollection({
+ loader:glob({pattern:'*.md',base:'./src/content/pages'}),
+ schema:z.object({title:z.string(),heroTitle:z.string(),description:z.string(),lead:z.string(),eyebrow:z.string(),image:z.enum(['coast','cedar','water','infrastructure'])})
+});
+export const collections = { work, labs, ideas, partners, people, pages };

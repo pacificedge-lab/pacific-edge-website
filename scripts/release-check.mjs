@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+if(fs.existsSync('.env'))process.loadEnvFile('.env');
+const failures=[];
+if(process.env.SITE_REVIEW==='true')failures.push('Review mode must be disabled for launch.');
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(process.env.PUBLIC_CONTACT_EMAIL||''))failures.push('Confirm PUBLIC_CONTACT_EMAIL.');
+if(!/^https:\/\//.test(process.env.PUBLIC_CONTACT_ENDPOINT||''))failures.push('Configure an HTTPS enquiry endpoint.');
+if(!/^(https:\/\/|\/)/.test(process.env.PUBLIC_PRIVACY_URL||''))failures.push('Provide privacy information for the actual enquiry process.');
+if(process.env.SITE_CONTENT_APPROVED!=='true')failures.push('Complete the content review in docs/coastal-editorial-review.md and explicitly set SITE_CONTENT_APPROVED=true.');
+if(!fs.existsSync('dist/index.html'))failures.push('Build the production site first.');
+if(failures.length){console.error('Not ready for public launch:\n'+failures.map(x=>' - '+x).join('\n'));process.exitCode=1;}else console.log('Release configuration checks passed. Confirm deployment acceptance in the review checklist.');

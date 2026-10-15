@@ -1,8 +1,8 @@
 ---
 title: JEIS Case Manager
 summary: Purpose-built operational workflow software designed around real administrative case work rather than around generic case-management abstractions.
-status: draft
-featured: true
+status: archived
+featured: false
 projectType: product
 developmentStatus: Active development
 order: 2
