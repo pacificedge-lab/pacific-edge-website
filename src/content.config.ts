@@ -9,6 +9,8 @@ const work = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
+    organization: z.string().optional(),
+    attribution: z.string().optional(),
     status,
     featured: z.boolean().default(false),
     domains: z.array(z.string()).default([]),

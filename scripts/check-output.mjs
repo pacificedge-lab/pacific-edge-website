@@ -44,9 +44,22 @@ for(const file of files){
 const home=fs.readFileSync(path.join(directory,'index.html'),'utf8');
 for(const service of ['Strategy and direction','Operations and capability','Advisory and leadership'])assert(home.includes(service),'missing core service '+service);
 if(review){
- assert(home.includes('data-case-placeholder'),'review must expose case-account editorial spaces');
+ const advisory=fs.readFileSync(path.join(directory,'advisory/index.html'),'utf8');
+ for(const id of ['fibre-delivery-operating-model','workforce-reporting-recovery']){
+  const route='/work/'+id;
+  assert(resolveRoute(route),'review case account missing: '+route);
+  assert(home.includes('href="'+route+'"'),'homepage case link missing: '+route);
+  assert(advisory.includes('href="'+route+'"'),'advisory case link missing: '+route);
+  const account=fs.readFileSync(resolveRoute(route),'utf8');
+  assert(account.replaceAll('&#39;', "'").includes("Chris McLean's prior professional experience"),'prior-experience attribution missing: '+route);
+ }
+ assert(!home.includes('data-case-placeholder'),'supplied case accounts must replace homepage placeholders');
  assert(resolveRoute('/labs/isef-support'),'ISEF review entry missing');
 }else{
+ for(const id of ['fibre-delivery-operating-model','workforce-reporting-recovery']){
+  assert(!resolveRoute('/work/'+id),'review-only case account was emitted: '+id);
+  assert(!home.includes('/work/'+id),'unpublished case link was emitted: '+id);
+ }
  assert(!resolveRoute('/labs/isef-support'),'unpublished ISEF entry was emitted');
  assert(!resolveRoute('/work/ai-operating-capability'),'archived work was emitted');
  assert(!resolveRoute('/labs/proposal-environment'),'archived internal portfolio was emitted');

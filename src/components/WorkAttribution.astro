@@ -1,0 +1,11 @@
+---
+interface Props {
+  organization?: string;
+  attribution?: string;
+}
+const { organization, attribution } = Astro.props;
+---
+{(organization || attribution) && <p class="pe-work-attribution">
+  {organization && <span>{organization}</span>}
+  {attribution && <span>{attribution}</span>}
+</p>}

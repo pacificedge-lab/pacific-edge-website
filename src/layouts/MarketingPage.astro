@@ -1,4 +1,5 @@
 ---
+import WorkAttribution from '../components/WorkAttribution.astro';
 import type {CollectionEntry} from 'astro:content';
 import type {MarkdownHeading} from 'astro';
 import {getCollection} from 'astro:content';
@@ -9,15 +10,17 @@ import {isReview,visible,sortByOrder,partnerVisible} from '../lib/content';
 interface Props{page:CollectionEntry<'pages'>['data'];headings:MarkdownHeading[];pageId:string;}
 const {page,headings,pageId}=Astro.props;
 const projects=pageId==='labs'?sortByOrder((await getCollection('labs')).filter(visible).filter(e=>e.data.featured)):[];
+const relatedWork=pageId==='advisory'?sortByOrder((await getCollection('work')).filter(visible).filter(e=>e.data.featured)):[];
 const partners=pageId==='partners'?sortByOrder((await getCollection('partners')).filter(partnerVisible)):[];
 ---
 <BaseLayout title={`${page.title} — Pacific Edge`} description={page.description} noindex={pageId==='partners'&&!partners.length}>
  <PageHero title={page.heroTitle} lead={page.lead} eyebrow={page.eyebrow} image={page.image}/>
- <div class="pe-page-grid"><aside class="pe-contents" aria-label="Page contents"><strong>On this page</strong><nav>{headings.filter(h=>h.depth===2).map(h=><a href={`#${h.slug}`}>{h.text}</a>)}{pageId==='labs'&&projects.length>0&&<a href="#selected-development">Selected development</a>}</nav></aside>
+ <div class="pe-page-grid"><aside class="pe-contents" aria-label="Page contents"><strong>On this page</strong><nav>{headings.filter(h=>h.depth===2).map(h=><a href={`#${h.slug}`}>{h.text}</a>)}{relatedWork.length>0&&<a href="#experience-in-practice">Experience in practice</a>}{pageId==='labs'&&projects.length>0&&<a href="#selected-development">Selected development</a>}</nav></aside>
  <article class="pe-prose">
  {pageId==='about'&&<img class="pe-about-portrait" src="/images/chris.jpg" alt="Chris McLean, founder of Pacific Edge" width="640" height="800" loading="lazy" decoding="async"/>}
  {pageId==='partners'&&isReview&&!partners.length&&<div class="pe-review-note">Partner profiles will be added once the relationships and public descriptions are confirmed.</div>}
  <slot/>
+ {relatedWork.length>0&&<section id="experience-in-practice" aria-labelledby="experience-in-practice-title"><h2 id="experience-in-practice-title">Experience in practice</h2>{relatedWork.map(entry=><article class="pe-related-work"><p class="pe-kicker">{entry.data.domains.join(' / ')}</p><h3><a href={`/work/${entry.id}`}>{entry.data.title}</a></h3><p>{entry.data.summary}</p><WorkAttribution organization={entry.data.organization} attribution={entry.data.attribution}/><a class="pe-text-link" href={`/work/${entry.id}`}>Read the account</a></article>)}</section>}
  {pageId==='partners'&&partners.length>0&&<section><h2>Our partners</h2>{partners.map(partner=><article><h3>{partner.data.name}</h3><p>{partner.data.summary}</p>{partner.data.website&&<p><a href={partner.data.website}>Visit {partner.data.name}</a></p>}</article>)}</section>}
  {pageId==='labs'&&projects.length>0&&<section id="selected-development"><h2>Selected development</h2>{projects.map(project=><article class="pe-project"><p class="pe-kicker">{project.data.developmentStatus}</p><h3>{project.data.title}</h3><p>{project.data.summary}</p><p><a href={`/labs/${project.id}`}>Explore {project.data.title} ↗</a></p></article>)}</section>}
  </article></div>

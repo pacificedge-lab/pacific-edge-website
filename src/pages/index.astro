@@ -1,4 +1,5 @@
 ---
+import WorkAttribution from '../components/WorkAttribution.astro';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { isReview, sortByOrder, visible, partnerVisible } from '../lib/content';
@@ -29,7 +30,7 @@ const partners=sortByOrder((await getCollection('partners')).filter(partnerVisib
             </section>
             {(work.length > 0 || isReview) && <section class="pe-section pe-shell pe-work-section" id="home-work" aria-labelledby="home-work-title">
 <div class="pe-section-heading"><p class="pe-kicker">02 / Experience</p><h2 id="home-work-title">Selected work</h2><p>Explore the situations, decisions and practical work behind selected assignments.</p></div>
-{work.length ? <div class="pe-case-list">{work.map(entry=><article class="pe-case"><p class="pe-case-label">{entry.data.domains.join(' / ')}</p><h3><a href={`/work/${entry.id}`}>{entry.data.title}</a></h3><p class="pe-case-note">{entry.data.summary}</p></article>)}</div> : <div class="pe-case-list"><article class="pe-case" data-case-placeholder><p class="pe-case-label">Case study to be supplied</p><h3>Strategic judgment and initiative recovery</h3><p class="pe-case-note">Space for a verified account of the situation, decisions and contribution.</p></article><article class="pe-case" data-case-placeholder><p class="pe-case-label">Case study to be supplied</p><h3>Operational and technology delivery</h3><p class="pe-case-note">Space for a verified account of the work and its supported results.</p></article></div>}
+{work.length ? <div class="pe-case-list">{work.map(entry=><article class="pe-case"><p class="pe-case-label">{entry.data.domains.join(' / ')}</p><h3><a href={`/work/${entry.id}`}>{entry.data.title}</a></h3><p class="pe-case-note">{entry.data.summary}</p><WorkAttribution organization={entry.data.organization} attribution={entry.data.attribution}/></article>)}</div> : <div class="pe-case-list"><article class="pe-case" data-case-placeholder><p class="pe-case-label">Case study to be supplied</p><h3>Strategic judgment and initiative recovery</h3><p class="pe-case-note">Space for a verified account of the situation, decisions and contribution.</p></article><article class="pe-case" data-case-placeholder><p class="pe-case-label">Case study to be supplied</p><h3>Operational and technology delivery</h3><p class="pe-case-note">Space for a verified account of the work and its supported results.</p></article></div>}
 <a class="pe-text-link" href="/work">Explore selected work <span aria-hidden="true">↗</span></a></section>}
 
             <section class="pe-pathway pe-pathway-first" id="home-first-nations" aria-labelledby="home-first-nations-title">

@@ -1,6 +1,6 @@
 # Coastal Editorial implementation review
 
-Approved by Chris McLean on 15 October 2026. Implements Website Brief revision 0.6 and Copy Draft 0.3. This branch is a review draft; it is not a launch approval.
+Approved design direction from Chris McLean on 15 October 2026. Implements Website Brief revision 0.6 and Copy Draft 0.4. This branch is a review draft; it is not a launch approval.
 
 ## Repository review and retained foundation
 
@@ -14,13 +14,13 @@ Approved by Chris McLean on 15 October 2026. Implements Website Brief revision 0
 
 ## Review modes
 
-Development shows review content. For a production-style review build, set SITE_REVIEW=true before npm run build. It adds a draft banner, noindex metadata, an empty sitemap, the ISEF review entry and explicitly labelled work placeholders. Noindex is not access control: keep the review build local or behind real private access.
+Development shows review content. For a production-style review build, set SITE_REVIEW=true before npm run build. It adds a draft banner, noindex metadata, an empty sitemap, the ISEF review entry and the two anonymized case accounts. Noindex is not access control: keep the review build local or behind real private access.
 
 A default production build excludes unpublished collection items and the work placeholders. Unconfirmed partner links are omitted. Contact inputs are disabled in review; public output omits the form until a verified email, HTTPS endpoint and privacy URL are configured.
 
 ## Content needed from Chris
 
-- Two verified work accounts: one strategic judgment or initiative recovery example, one operational or technology delivery example. Record the situation, constraints, role, decisions, work, result and current delivery status. Confirm naming and confidentiality.
+- Two substantive case accounts are integrated: fibre delivery operating-model design and reporting recovery within an urgent workforce implementation. Chris approved the editorial direction and general client descriptions. Final website wording remains in review status pending publication approval; client and employer names are excluded.
 - Confirm partner names, expertise, working arrangements and agreed public descriptions. The site is designed to remain complete while these are pending.
 - Review the founder biography and provide a short personal perspective if desired.
 - Confirm the scope and delivery capacity behind the initial engagements, including funding pathways and specialist implementation.
@@ -47,3 +47,19 @@ A default production build excludes unpublished collection items and the work pl
 - Release check intentionally reports the missing contact configuration and outstanding content approval. The draft is not ready for public launch.
 - Expected build notices: the partners collection is empty until real profiles are supplied. No fabricated seed profiles were added to silence these notices.
 - A dependency lockfile records the tested install. Vite's preserveSymlinks option resolves the dependency-loading failure observed in the Windows sandbox checkout.
+
+## Evidence integration - 15 October 2026
+
+- Home and Selected Work show the two cases, their service relevance, general organization descriptions and attribution to Chris McLean's prior professional experience.
+- Advisory includes a concise Experience in practice section linking to both accounts. Each full account links back to its relevant Advisory service or recovery section.
+- The fibre account emphasizes framework strategy and integration of distributed partner knowledge across the entire delivery chain. Exact partner count, implementation extent and subsequent company closure remain outside website source.
+- The workforce account credits the data team's source-information work separately from Chris's R solution. It claims usable reporting answers and does not claim that the solution fixed allocation rules, eliminated approval workload or constituted an AI implementation.
+- Publication status is shared across cards, supporting evidence links and full routes. Review-only accounts remain absent from production output.
+- No proprietary artifacts, raw extracts, identifying client details or internal evidence notes are included in these case entries.
+
+### Integration validation
+
+- Astro check: 33 source files, zero diagnostics. Production output: 12 HTML files and 323 local references; review output: 18 HTML files and 537 local references.
+- Review checks verify both case routes, links from Home and Advisory, prior-experience attribution and replacement of the homepage placeholders. Production checks verify that the review-only accounts and their homepage links are excluded.
+- Browser checks: 12 routes at 1440, 736, 390 and 320 pixels, with no horizontal overflow, clipped content, broken images, failed requests or script exceptions. Mobile navigation and non-submitting contact behavior passed.
+- Standalone preview: all 12 pages loaded with imagery. Click navigation passed from Home to the fibre case, back to the relevant Advisory section, into the workforce case and back to Selected Work.
