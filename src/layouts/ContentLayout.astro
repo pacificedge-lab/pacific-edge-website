@@ -1,22 +1,11 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-interface Props {
-  title: string;
-  description: string;
-  eyebrow?: string;
-  meta?: string;
-}
-const { title, description, eyebrow, meta } = Astro.props;
+import PageHero from '../components/PageHero.astro';
+import ContactInvitation from '../components/ContactInvitation.astro';
+interface Props{title:string;description:string;eyebrow?:string;meta?:string;}
+const {title,description,eyebrow='Pacific Edge',meta}=Astro.props;
 ---
-
-<BaseLayout title={`${title} | Pacific Edge`} description={description}>
-  <article class="content-page shell">
-    <header class="content-hero">
-      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-      <h1>{title}</h1>
-      <p class="lede">{description}</p>
-      {meta && <p class="entry-meta">{meta}</p>}
-    </header>
-    <div class="prose"><slot /></div>
-  </article>
+<BaseLayout title={`${title} — Pacific Edge`} description={description}>
+<PageHero title={title} lead={description} eyebrow={eyebrow} image={eyebrow==='Pacific Edge Labs'?'water':'coast'}/>
+<div class="pe-page-grid"><aside class="pe-contents"><strong>{eyebrow}</strong>{meta&&<p>{meta}</p>}<a href={eyebrow==='Pacific Edge Labs'?'/labs':eyebrow==='Selected Work'?'/work':'/ideas'}>Back to {eyebrow==='Pacific Edge Labs'?'Labs':eyebrow==='Selected Work'?'selected work':'Ideas'} ↗</a></aside><article class="pe-prose"><slot/></article></div><ContactInvitation/>
 </BaseLayout>

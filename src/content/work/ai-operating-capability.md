@@ -1,8 +1,8 @@
 ---
 title: Moving enterprise AI from interest to operating capability
 summary: Connecting AI ambition to data readiness, governance, workflow design, decision rights and organizational capability.
-status: draft
-featured: true
+status: archived
+featured: false
 domains:
   - AI
   - Transformation

@@ -1,30 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
-const enabled = Boolean(endpoint);
+import PageHero from '../components/PageHero.astro';
+import {isReview} from '../lib/content';
+import {contactEmail,validEmail,contactEndpoint,contactEnabled,privacyUrl} from '../lib/site';
 ---
-<BaseLayout title="Contact | Pacific Edge" description="Tell Pacific Edge what you're working on.">
-  <section class="page-intro shell contact-intro">
-    <p class="eyebrow">Contact</p>
-    <h1>What are you working on?</h1>
-    <p class="lede">Tell us a little about what is happening. You do not need to know what kind of consulting engagement you need.</p>
-  </section>
-  <section class="section section--light">
-    <div class="shell form-shell">
-      {enabled ? (
-        <form action={endpoint} method="post">
-          <label>Name<input type="text" name="name" required autocomplete="name" /></label>
-          <label>Email<input type="email" name="email" required autocomplete="email" /></label>
-          <label>Organization <span>(optional)</span><input type="text" name="organization" autocomplete="organization" /></label>
-          <label>What are you working on?<textarea name="message" rows="8" required></textarea></label>
-          <button type="submit">Start the conversation →</button>
-        </form>
-      ) : (
-        <div class="form-disabled">
-          <p class="eyebrow">Contact endpoint not yet configured</p>
-          <p>The public form will be enabled when the secure submission endpoint is connected.</p>
-        </div>
-      )}
-    </div>
-  </section>
+<BaseLayout title="Contact — Pacific Edge" description="Discuss a strategic decision, operational challenge, AI initiative or need for leadership support with Pacific Edge.">
+<PageHero title="What are you working on?" lead="Tell us about the decision, challenge or initiative in front of you." eyebrow="Start a conversation" image="coast" cta={false}/>
+<section class="pe-shell pe-contact-grid"><div>
+<div class="pe-section-heading"><h2>Send an enquiry</h2><p>A short description is enough to start: what is happening, what you want to achieve and where you would value support.</p></div>
+{(contactEnabled||isReview)&&<form class="pe-form" action={contactEnabled?contactEndpoint:undefined} method="post" aria-describedby={!contactEnabled?'contact-status':undefined}>
+ <label>Name<input type="text" name="name" required autocomplete="name" disabled={!contactEnabled}/></label>
+ <label>Email<input type="email" name="email" required autocomplete="email" disabled={!contactEnabled}/></label>
+ <label>Organization <span>(optional)</span><input type="text" name="organization" autocomplete="organization" disabled={!contactEnabled}/></label>
+ <label>What are you working on?<textarea name="message" rows="6" required disabled={!contactEnabled}></textarea></label>
+ {contactEnabled&&<p>How we handle your enquiry: <a href={privacyUrl}>privacy information</a>.</p>}
+ <button class="pe-button" type="submit" disabled={!contactEnabled}>Send enquiry <span aria-hidden="true">↗</span></button>
+</form>}
+{!contactEnabled&&<p class="pe-contact-status" id="contact-status">{isReview?'Review preview: enquiries are not submitted. Contact arrangements will be confirmed before launch.':validEmail?'Please email Chris directly to start a conversation.':'Contact details are being finalized.'}</p>}
+</div><aside class="pe-contact-aside"><p class="pe-kicker">Working with Chris</p><h2>What happens next</h2><p>An initial conversation with Chris helps establish the need and whether Pacific Edge is a useful fit.</p><p>If we agree to proceed, we define the scope, responsibilities and commercial terms before work begins.</p>{validEmail&&<p class="pe-contact-status"><a href={`mailto:${contactEmail}`}>{contactEmail}</a></p>}</aside></section>
 </BaseLayout>

@@ -1,8 +1,8 @@
 ---
 title: Portals / SafetySync
 summary: A modernized institutional workflow concept focused on evidence, accountability, regulatory processes and durable access to organizational records.
-status: draft
-featured: true
+status: archived
+featured: false
 projectType: prototype
 developmentStatus: Architecture and modernization
 order: 3

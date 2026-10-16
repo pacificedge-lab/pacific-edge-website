@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://pacificedge.ca/sitemap-index.xml
+Sitemap: https://thepacificedge.ca/sitemap.xml
