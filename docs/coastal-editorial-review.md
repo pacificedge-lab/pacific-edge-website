@@ -1,6 +1,6 @@
 # Coastal Editorial implementation review
 
-Approved design direction from Chris McLean on 15 October 2026. Implements Website Brief revision 0.6 and Copy Draft 0.4. This branch is a review draft; it is not a launch approval.
+Approved design direction from Chris McLean on 15 October 2026. Implements Website Brief revision 0.6 and Copy Draft 0.5. This branch is a review draft; it is not a launch approval.
 
 ## Repository review and retained foundation
 
@@ -63,3 +63,19 @@ A default production build excludes unpublished collection items and the work pl
 - Review checks verify both case routes, links from Home and Advisory, prior-experience attribution and replacement of the homepage placeholders. Production checks verify that the review-only accounts and their homepage links are excluded.
 - Browser checks: 12 routes at 1440, 736, 390 and 320 pixels, with no horizontal overflow, clipped content, broken images, failed requests or script exceptions. Mobile navigation and non-submitting contact behavior passed.
 - Standalone preview: all 12 pages loaded with imagery. Click navigation passed from Home to the fibre case, back to the relevant Advisory section, into the workforce case and back to Selected Work.
+
+## Buyer review revisions - 17 October 2026
+
+- First Nations services now describe additional capacity and practical business and service design shaped around leadership priorities, existing strengths, governance and requirements. The copy avoids presenting a predetermined model of how an organization should operate.
+- Chris confirmed substantial planning engagements with Indigenous groups in the United States and the current Indigenous education systems work. The public account uses those general descriptions, credits Chris and identifies no clients. No engagement outcomes or subject matter beyond the confirmed scope have been added.
+- The broader planning experience appears near the beginning of First Nations services and in the founder biography. Indigenous education implementation and ISEF remain distinct, proportionate supporting examples.
+- Advisory explains entry through a buyer's situation and makes starting-engagement outputs clearer. Repeated approach and setup language has been shortened.
+- AI includes explicitly illustrative knowledge-access and draft-preparation workflows, two entry routes and clearer scoping of Pacific Edge and specialist contributions. The reporting case is labelled as data and reporting experience.
+- Supporting case links are available alongside the contents of Advisory and AI, before the main page text. Full Advisory case summaries remain available later on the page. Links retain the same publication controls as the accounts.
+- Public contact configuration, final offer scope and product availability remain launch requirements.
+
+### Buyer revision validation
+
+- Astro check: 33 source files, zero diagnostics. Production output: 12 HTML files and 325 local references. Review output: 18 HTML files and 542 local references.
+- Browser checks covered 12 routes at 1440, 736, 390 and 320 pixels, with no overflow, clipped content, broken images, failed requests or script exceptions. Mobile navigation and non-submitting contact behavior passed.
+- The 12-page standalone preview passed page, imagery and case-navigation checks. First Nations and AI page screenshots were inspected for hierarchy and readability.

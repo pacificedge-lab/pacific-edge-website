@@ -161,6 +161,7 @@ html{scroll-behavior:smooth}body{margin:0;background:#081726}*{box-sizing:border
 #pe-site .pe-work-attribution span{display:block}
 #pe-site .pe-related-work{padding-block:22px;border-bottom:1px solid var(--pe-line)}
 #pe-site .pe-related-work h3{margin-top:0}
+#pe-site .pe-supporting-evidence{margin-top:28px;padding-top:24px;border-top:1px solid var(--pe-line)}
 #pe-site .pe-inner-hero{display:grid;grid-template-columns:1.35fr .65fr;background:var(--pe-ink);color:var(--pe-paper);min-height:410px}
 #pe-site .pe-inner-opening{padding:62px clamp(23px,5.1cqw,66px)}
 #pe-site .pe-inner-hero h1{font-size:clamp(38px,5.3cqw,64px);max-width:20ch}

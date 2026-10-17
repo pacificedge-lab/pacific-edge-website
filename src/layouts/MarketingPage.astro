@@ -11,11 +11,12 @@ interface Props{page:CollectionEntry<'pages'>['data'];headings:MarkdownHeading[]
 const {page,headings,pageId}=Astro.props;
 const projects=pageId==='labs'?sortByOrder((await getCollection('labs')).filter(visible).filter(e=>e.data.featured)):[];
 const relatedWork=pageId==='advisory'?sortByOrder((await getCollection('work')).filter(visible).filter(e=>e.data.featured)):[];
+const supportingWork=pageId==='advisory'?relatedWork:pageId==='ai'?sortByOrder((await getCollection('work')).filter(visible).filter(e=>e.id==='workforce-reporting-recovery')):[];
 const partners=pageId==='partners'?sortByOrder((await getCollection('partners')).filter(partnerVisible)):[];
 ---
 <BaseLayout title={`${page.title} — Pacific Edge`} description={page.description} noindex={pageId==='partners'&&!partners.length}>
  <PageHero title={page.heroTitle} lead={page.lead} eyebrow={page.eyebrow} image={page.image}/>
- <div class="pe-page-grid"><aside class="pe-contents" aria-label="Page contents"><strong>On this page</strong><nav>{headings.filter(h=>h.depth===2).map(h=><a href={`#${h.slug}`}>{h.text}</a>)}{relatedWork.length>0&&<a href="#experience-in-practice">Experience in practice</a>}{pageId==='labs'&&projects.length>0&&<a href="#selected-development">Selected development</a>}</nav></aside>
+ <div class="pe-page-grid"><aside class="pe-contents" aria-label="Page contents"><strong>On this page</strong><nav>{headings.filter(h=>h.depth===2).map(h=><a href={`#${h.slug}`}>{h.text}</a>)}{relatedWork.length>0&&<a href="#experience-in-practice">Experience in practice</a>}{pageId==='labs'&&projects.length>0&&<a href="#selected-development">Selected development</a>}</nav>{supportingWork.length>0&&<div class="pe-supporting-evidence"><strong>{pageId==='ai'?'Data and reporting experience':'Related experience'}</strong><nav aria-label="Supporting experience">{supportingWork.map(entry=><a href={`/work/${entry.id}`}>{entry.data.title}</a>)}</nav></div>}</aside>
  <article class="pe-prose">
  {pageId==='about'&&<img class="pe-about-portrait" src="/images/chris.jpg" alt="Chris McLean, founder of Pacific Edge" width="640" height="800" loading="lazy" decoding="async"/>}
  {pageId==='partners'&&isReview&&!partners.length&&<div class="pe-review-note">Partner profiles will be added once the relationships and public descriptions are confirmed.</div>}

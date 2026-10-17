@@ -17,6 +17,8 @@ Chris is a business consultant and former Director of Business Optimization whos
 
 His work has crossed education, healthcare, finance and telecommunications infrastructure. It includes examining difficult operational problems, developing practical systems and helping significant initiatives regain direction.
 
+His experience also includes substantial planning engagements with Indigenous groups in the United States and current operational systems work in Indigenous education in Canada.
+
 Chris looks across the decisions, incentives, information and working arrangements that shape a situation. That breadth helps him connect different perspectives and identify a response that fits the organization's actual circumstances.
 
 ## How we approach the work

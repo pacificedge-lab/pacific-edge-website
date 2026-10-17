@@ -17,11 +17,27 @@ You may have a specific application in mind, a collection of experiments, or pre
 
 We examine the work and intended benefit before recommending an approach. The assessment can lead to process changes, conventional automation or an AI application, according to what would improve the result.
 
+If the starting point is uncertain, an opportunity and readiness assessment establishes priorities. If you already have a defined use case, we can scope a pilot around the workflow, information and decision it needs to support.
+
+## What this could look like
+
+These illustrative applications show the kinds of work an engagement could explore.
+
+**Finding organizational knowledge**
+
+Help staff locate relevant information in approved materials, with source references and access shaped around their responsibilities. A pilot would test whether the answers are useful and supported by the available information, and establish when a person needs to review or resolve a question.
+
+**Preparing work for review**
+
+Use agreed inputs to prepare a draft briefing, routine document or structured summary for a person to review. The workflow would define what the system can prepare, what needs checking and who approves the result.
+
 ## Opportunity and readiness
 
 Identify where capability could be improved and assess whether AI would make a useful contribution.
 
 The AI Opportunity and Readiness Assessment produces a prioritized set of opportunities, the requirements and constraints around them, and a recommendation for the first initiative. Where a pilot is appropriate, its brief defines the workflow, resources and evaluation criteria.
+
+Leadership can use the findings to choose a first investment, address readiness gaps or decide that further development is not yet justified.
 
 ## Workflow and automation design
 
@@ -39,7 +55,7 @@ The work can address information structure, ownership, access and maintenance, a
 
 Plan how a new application will operate in practice: who uses it, who supports it, what needs review and how its usefulness will be assessed. Set the scope of automation and the points where a person must exercise judgment, according to the consequences involved.
 
-Support can include a defined pilot, guidance for users, implementation coordination and ongoing leadership. The scope establishes the delivery team and any specialist development or integration expertise required.
+Support can include a defined pilot, guidance for users, implementation coordination and ongoing leadership. Pacific Edge's contribution can cover assessment, workflow and information design, evaluation and implementation leadership. A pilot brief identifies the proposed build, what Pacific Edge will deliver directly and any specialist development or integration required before implementation begins.
 
 ## Testing an application
 

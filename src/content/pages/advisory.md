@@ -7,7 +7,7 @@ eyebrow: "Advisory"
 image: "coast"
 ---
 
-Pacific Edge works across strategy, operations and technology because those decisions affect one another. An engagement can begin with a defined question, a persistent operational problem or a need for continuing leadership.
+An engagement can begin with a consequential decision, a persistent operational problem or an initiative that needs experienced leadership. Bring the situation; our initial conversation establishes which approach would be useful and what a first assignment should produce.
 
 [Discuss your situation](/contact)
 
@@ -21,7 +21,7 @@ The work can address organizational priorities, operating models, technology dec
 
 Examine a consequential issue or competing initiatives with leadership. Establish the options and trade-offs, agree priorities and define an implementation agenda.
 
-You receive a clear direction, the reasoning behind it and practical next steps.
+You receive an assessment of the options and trade-offs, agreed priorities and an implementation agenda. This gives leadership a basis for deciding where to focus and what to resource next.
 
 ## Operations and capability
 
@@ -33,9 +33,11 @@ Technology work may include digital systems, reporting, automation or purpose-bu
 
 Turn an agreed priority into a workable delivery approach. Assess the capabilities and resources required, identify gaps, and establish responsibilities, dependencies and implementation stages.
 
+You receive a sequenced roadmap to decide what to start, what needs additional capacity and which dependencies must be resolved first.
+
 **A starting engagement: Operational Systems Review**
 
-Investigate a defined area of existing work that creates recurring friction. Identify the causes and recommend improvements to workflows, responsibilities and supporting information or technology.
+Investigate a defined area of existing work that creates recurring friction. You receive a diagnosis of the causes and prioritized recommendations for improving workflows, responsibilities and supporting information or technology.
 
 ## Advisory and leadership
 
@@ -59,7 +61,7 @@ We examine the objectives, decisions and delivery conditions to establish what i
 
 **Initiative Recovery Assessment**
 
-A candid assessment of the situation, practical options and a recommended response.
+A candid assessment of the situation, the barriers to progress and practical options. You receive a recommended response and priorities for recovery, a revised scope or an orderly stop.
 
 **Recovery Leadership**
 
@@ -75,13 +77,11 @@ Implementation can also begin directly when the need and scope are already clear
 
 ## How we work
 
-We begin by establishing what is happening, what decision is required and what is preventing progress. We connect the available evidence with the perspectives of the people involved, making material assumptions and uncertainty visible.
-
-The response should fit your operating reality. That may involve a clearer decision, a redesigned process, a practical tool or a larger implementation. We leave behind the reasoning, responsibilities and working knowledge needed to use and improve the result.
+We connect the available evidence with the perspectives of the people involved, making material assumptions and uncertainty visible. The response fits the organization's resources and responsibilities. The reasoning, working knowledge and ownership needed to use and improve the result form part of the work.
 
 ## How an engagement begins
 
-An initial conversation helps us understand the situation and whether Pacific Edge is a useful fit. We then agree a scope covering the intended outputs, responsibilities, timing and commercial terms.
+Following the initial conversation, we agree a scope covering the intended outputs, responsibilities, timing and commercial terms.
 
 You can commission a focused assignment or retain ongoing advisory and leadership capacity.
 
