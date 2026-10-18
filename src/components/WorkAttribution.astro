@@ -9,4 +9,7 @@ const caption = attribution && context
   ? `From ${attribution} with a ${context}.`
   : attribution || organization;
 ---
-{caption && <p class="pe-work-attribution">{caption}</p>}
+{caption && <aside class="pe-work-attribution" aria-label="Experience context">
+  <p class="pe-attribution-label">Experience context</p>
+  <p class="pe-attribution-copy">{caption}</p>
+</aside>}

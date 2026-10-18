@@ -157,7 +157,9 @@ html{scroll-behavior:smooth}body{margin:0;background:#081726}*{box-sizing:border
 #pe-site .pe-review-label{display:inline-block;color:var(--pe-ocean);font:500 11px/1.5 'Inter Variable',Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
 #pe-site .pe-case-note{max-width:45ch}
 #pe-site .pe-case h3 a{text-decoration:none}
-#pe-site .pe-work-attribution{font-size:13px!important;line-height:1.6!important;color:var(--pe-secondary);margin-top:18px;margin-bottom:20px}
+#pe-site .pe-work-attribution{color:var(--pe-secondary);margin:22px 0;padding:12px 15px;border-left:2px solid var(--pe-ocean);background:var(--pe-mist)}
+#pe-site .pe-work-attribution .pe-attribution-label{font-size:10px;line-height:1.5;font-weight:550;letter-spacing:.1em;text-transform:uppercase;color:var(--pe-ocean);margin:0 0 7px}
+#pe-site .pe-work-attribution .pe-attribution-copy{font-size:13px;line-height:1.6;margin:0}
 #pe-site .pe-related-work{padding-block:22px;border-bottom:1px solid var(--pe-line)}
 #pe-site .pe-related-work h3{margin-top:0}
 #pe-site .pe-supporting-evidence{margin-top:28px;padding-top:24px;border-top:1px solid var(--pe-line)}

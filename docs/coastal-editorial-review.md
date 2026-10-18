@@ -83,3 +83,5 @@ A default production build excludes unpublished collection items and the work pl
 ## Case attribution presentation - 17 October 2026
 
 Case context and experience attribution now form one sentence in a single caption, such as "From Chris McLean's prior professional experience with a major provincial health organization." This treatment is shared by Home, Advisory, Selected Work and the full accounts. It replaces the two unlabelled stacked fragments while preserving the distinction between earlier experience and Pacific Edge assignments.
+
+The caption is presented in a separate Experience context block with a small uppercase label, a quiet background and an accent rule. This differentiates the attribution from the preceding narrative on cards and full accounts.
