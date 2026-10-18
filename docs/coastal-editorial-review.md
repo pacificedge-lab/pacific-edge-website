@@ -79,3 +79,7 @@ A default production build excludes unpublished collection items and the work pl
 - Astro check: 33 source files, zero diagnostics. Production output: 12 HTML files and 325 local references. Review output: 18 HTML files and 542 local references.
 - Browser checks covered 12 routes at 1440, 736, 390 and 320 pixels, with no overflow, clipped content, broken images, failed requests or script exceptions. Mobile navigation and non-submitting contact behavior passed.
 - The 12-page standalone preview passed page, imagery and case-navigation checks. First Nations and AI page screenshots were inspected for hierarchy and readability.
+
+## Case attribution presentation - 17 October 2026
+
+Case context and experience attribution now form one sentence in a single caption, such as "From Chris McLean's prior professional experience with a major provincial health organization." This treatment is shared by Home, Advisory, Selected Work and the full accounts. It replaces the two unlabelled stacked fragments while preserving the distinction between earlier experience and Pacific Edge assignments.

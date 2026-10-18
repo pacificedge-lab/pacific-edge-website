@@ -4,8 +4,9 @@ interface Props {
   attribution?: string;
 }
 const { organization, attribution } = Astro.props;
+const context = organization ? organization.charAt(0).toLowerCase() + organization.slice(1) : undefined;
+const caption = attribution && context
+  ? `From ${attribution} with a ${context}.`
+  : attribution || organization;
 ---
-{(organization || attribution) && <p class="pe-work-attribution">
-  {organization && <span>{organization}</span>}
-  {attribution && <span>{attribution}</span>}
-</p>}
+{caption && <p class="pe-work-attribution">{caption}</p>}
