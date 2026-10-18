@@ -1,6 +1,6 @@
 # Coastal Editorial implementation review
 
-Approved design direction from Chris McLean on 15 October 2026. Implements Website Brief revision 0.6 and Copy Draft 0.5. This branch is a review draft; it is not a launch approval.
+Approved design direction from Chris McLean on 15 October 2026. Implements Website Brief revision 0.6 and Copy Draft 0.6. This branch is a review draft; it is not a launch approval.
 
 ## Repository review and retained foundation
 
@@ -16,7 +16,7 @@ Approved design direction from Chris McLean on 15 October 2026. Implements Websi
 
 Development shows review content. For a production-style review build, set SITE_REVIEW=true before npm run build. It adds a draft banner, noindex metadata, an empty sitemap, the ISEF review entry and the two anonymized case accounts. Noindex is not access control: keep the review build local or behind real private access.
 
-A default production build excludes unpublished collection items and the work placeholders. Unconfirmed partner links are omitted. Contact inputs are disabled in review; public output omits the form until a verified email, HTTPS endpoint and privacy URL are configured.
+A default production build excludes unpublished collection items and the work placeholders. Unconfirmed partner links are omitted. Contact inputs are always disabled in review. Public output offers direct email while form switches and the Turnstile key remain unconfigured.
 
 ## Content needed from Chris
 
@@ -25,7 +25,7 @@ A default production build excludes unpublished collection items and the work pl
 - Review the founder biography and provide a short personal perspective if desired.
 - Confirm the scope and delivery capacity behind the initial engagements, including funding pathways and specialist implementation.
 - Confirm ISEF Support's public name, summary and availability before publishing its entry. Its current review stage is Preparing for launch.
-- Confirm the public email, actual enquiry handler and privacy information.
+- Public mailbox hello@thepacificedge.ca is confirmed operational. Complete the Cloudflare configuration and hosted delivery acceptance in docs/contact-setup.md, and review the enquiry privacy page.
 
 ## Final acceptance before launch
 
@@ -85,3 +85,17 @@ A default production build excludes unpublished collection items and the work pl
 Case context and experience attribution now form one sentence in a single caption, such as "From Chris McLean's prior professional experience with a major provincial health organization." This treatment is shared by Home, Advisory, Selected Work and the full accounts. It replaces the two unlabelled stacked fragments while preserving the distinction between earlier experience and Pacific Edge assignments.
 
 The caption is presented in a separate Experience context block with a small uppercase label, a quiet background and an accent rule. This differentiates the attribution from the preceding narrative on cards and full accounts.
+
+
+## Contact implementation - 18 October 2026
+
+The public mailbox is confirmed operational. The form now has a Worker submission handler, server-side Turnstile verification, rate limiting, fixed-recipient email delivery, visitor Reply-To, status feedback and an enquiry privacy page. The public form and Worker delivery remain disabled pending Cloudflare account configuration and hosted acceptance. Local testing uses simulated services and synthetic data; no emails are sent. See docs/contact-setup.md for the remaining account steps.
+
+### Contact implementation validation
+
+- Handler tests: 18 passing checks using simulated verification, rate limiting and email. These cover fixed delivery addresses, validation, body limits, origin checks, disabled or missing configuration and service failures.
+- Astro check: 36 source files, zero diagnostics. Default production output: 13 HTML files and 360 local references. Enabled-form fixture: 13 HTML files and 361 references. Review output: 19 HTML files and 585 references.
+- Browser tests of the enabled form intercepted every submission and verification request. Duplicate clicks produced one request; failed and interrupted attempts preserved the message; confirmed success cleared it. No real email was sent.
+- Browser layout checks passed for 13 routes at 1440, 736, 390 and 320 pixels, with no overflow, clipped content, broken images, failed requests or script exceptions. Mobile navigation passed.
+- Review mode kept the form disabled even with the public enable switch and a synthetic Turnstile sitekey supplied. The standalone 13-page preview passed page, imagery and case-navigation checks.
+- Release checks continue to block publication pending real Cloudflare configuration, hosted delivery acceptance and final content approval. Local checks do not verify account availability or email receipt.

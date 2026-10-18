@@ -1,7 +1,8 @@
-export const contactEmail=(import.meta.env.PUBLIC_CONTACT_EMAIL || '').trim();
-export const contactEndpoint=(import.meta.env.PUBLIC_CONTACT_ENDPOINT || '').trim();
-export const privacyUrl=(import.meta.env.PUBLIC_PRIVACY_URL || '').trim();
+import { isReview } from './content';
+export const contactEmail=(import.meta.env.PUBLIC_CONTACT_EMAIL || 'hello@thepacificedge.ca').trim();
+export const contactEndpoint='/api/contact';
+export const privacyUrl='/privacy';
+export const turnstileSiteKey=(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '').trim();
 export const validEmail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail);
-export const secureEndpoint=/^https:\/\//.test(contactEndpoint);
-export const validPrivacy=/^https:\/\//.test(privacyUrl)||privacyUrl.startsWith('/');
-export const contactEnabled=validEmail&&secureEndpoint&&validPrivacy;
+export const contactConfigured=import.meta.env.PUBLIC_CONTACT_ENABLED==='true'&&validEmail&&Boolean(turnstileSiteKey);
+export const contactEnabled=!isReview&&contactConfigured;

@@ -2,20 +2,59 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import {isReview} from '../lib/content';
-import {contactEmail,validEmail,contactEndpoint,contactEnabled,privacyUrl} from '../lib/site';
+import {contactEmail,validEmail,contactEndpoint,contactEnabled,privacyUrl,turnstileSiteKey} from '../lib/site';
 ---
 <BaseLayout title="Contact — Pacific Edge" description="Discuss a strategic decision, operational challenge, AI initiative or need for leadership support with Pacific Edge.">
 <PageHero title="What are you working on?" lead="Tell us about the decision, challenge or initiative in front of you." eyebrow="Start a conversation" image="coast" cta={false}/>
 <section class="pe-shell pe-contact-grid"><div>
 <div class="pe-section-heading"><h2>Send an enquiry</h2><p>A short description is enough to start: what is happening, what you want to achieve and where you would value support.</p></div>
-{(contactEnabled||isReview)&&<form class="pe-form" action={contactEnabled?contactEndpoint:undefined} method="post" aria-describedby={!contactEnabled?'contact-status':undefined}>
- <label>Name<input type="text" name="name" required autocomplete="name" disabled={!contactEnabled}/></label>
- <label>Email<input type="email" name="email" required autocomplete="email" disabled={!contactEnabled}/></label>
- <label>Organization <span>(optional)</span><input type="text" name="organization" autocomplete="organization" disabled={!contactEnabled}/></label>
- <label>What are you working on?<textarea name="message" rows="6" required disabled={!contactEnabled}></textarea></label>
+{(contactEnabled||isReview)&&<form class="pe-form" id="enquiry-form" data-live={contactEnabled?'true':'false'} action={contactEnabled?contactEndpoint:undefined} method="post" aria-describedby={!contactEnabled?'contact-status':'enquiry-guidance'}>
+ <p id="enquiry-guidance">Please keep your initial enquiry general and avoid including confidential client, student or other sensitive information.</p>
+ <label>Name<input type="text" name="name" required maxlength="100" autocomplete="name" disabled={!contactEnabled}/></label>
+ <label>Email<input type="email" name="email" required maxlength="254" autocomplete="email" disabled={!contactEnabled}/></label>
+ <label>Organization <span>(optional)</span><input type="text" name="organization" maxlength="160" autocomplete="organization" disabled={!contactEnabled}/></label>
+ <label>What are you working on?<textarea name="message" rows="6" required maxlength="5000" disabled={!contactEnabled}></textarea></label>
+ <div class="pe-form-trap" aria-hidden="true"><label>Leave this field empty<input name="website" type="text" tabindex="-1" autocomplete="off" disabled={!contactEnabled}/></label></div>
+ {contactEnabled&&<div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-action="contact" data-size="flexible" data-theme="light"></div>}
  {contactEnabled&&<p>How we handle your enquiry: <a href={privacyUrl}>privacy information</a>.</p>}
+ <p id="enquiry-result" class="pe-form-result" role="status" aria-live="polite" tabindex="-1" hidden></p>
  <button class="pe-button" type="submit" disabled={!contactEnabled}>Send enquiry <span aria-hidden="true">↗</span></button>
 </form>}
-{!contactEnabled&&<p class="pe-contact-status" id="contact-status">{isReview?'Review preview: enquiries are not submitted. Contact arrangements will be confirmed before launch.':validEmail?'Please email Chris directly to start a conversation.':'Contact details are being finalized.'}</p>}
+{!contactEnabled&&<p class="pe-contact-status" id="contact-status">{isReview?'Review preview: enquiries are not submitted. You can email Chris directly using the address alongside this form.':validEmail?'Please email Chris directly to start a conversation.':'Contact details are being finalized.'}</p>}
 </div><aside class="pe-contact-aside"><p class="pe-kicker">Working with Chris</p><h2>What happens next</h2><p>An initial conversation with Chris helps establish the need and whether Pacific Edge is a useful fit.</p><p>If we agree to proceed, we define the scope, responsibilities and commercial terms before work begins.</p>{validEmail&&<p class="pe-contact-status"><a href={`mailto:${contactEmail}`}>{contactEmail}</a></p>}</aside></section>
+{contactEnabled&&<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 </BaseLayout>
+<script>
+ const form=document.querySelector<HTMLFormElement>('#enquiry-form[data-live="true"]');
+ if(form){
+  const button=form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const result=form.querySelector<HTMLParagraphElement>('#enquiry-result')!;
+  let sending=false;
+  const show=(message:string,error=false)=>{
+   result.textContent=message;result.hidden=false;result.dataset.error=String(error);
+   if(error)result.focus();
+  };
+  form.addEventListener('submit',async(event)=>{
+   event.preventDefault();
+   if(sending||!form.reportValidity())return;
+   const body=new URLSearchParams();
+   for(const [key,value] of new FormData(form))if(typeof value==='string')body.append(key,value);
+   if(!body.get('cf-turnstile-response')){show('Please complete the security check before sending your enquiry.',true);return;}
+   sending=true;button.disabled=true;form.setAttribute('aria-busy','true');show('Sending your enquiry…');
+   try{
+    const response=await fetch(form.action,{method:'POST',headers:{Accept:'application/json'},body,signal:AbortSignal.timeout(15000)});
+    const data=await response.json();
+    if(response.ok&&data.ok===true){
+     form.reset();show('Your enquiry has been submitted. Thank you for getting in touch.');
+    }else{
+     show(typeof data.message==='string'?data.message:'We could not confirm submission. Please email hello@thepacificedge.ca.',true);
+    }
+   }catch{
+    show('We could not confirm submission. Your message has been kept on this page. Please email hello@thepacificedge.ca before trying again.',true);
+   }finally{
+    sending=false;button.disabled=false;form.removeAttribute('aria-busy');
+    (window as Window&{turnstile?:{reset:()=>void}}).turnstile?.reset();
+   }
+  });
+ }
+</script>
