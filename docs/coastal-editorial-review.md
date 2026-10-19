@@ -107,3 +107,7 @@ Chris clarified that First Nations work is relevant experience, but Pacific Edge
 Chris confirmed that the hosted review banner, draft case accounts and disabled contact form are now present after updating the existing feature Preview's own settings. Previews Base settings alone did not update that existing Preview. For future build-setting changes, check the specific Preview configuration as well as Base.
 
 Validation: Astro check returned zero diagnostics across 37 files. Review output passed 19 HTML-file and 585 local-reference checks; production output passed 13 HTML-file and 360 local-reference checks. These checks cover publication controls and links. The revised homepage still needs visual inspection on the hosted Preview; a browser connection was not available for this change.
+
+Chris preferred the reduced First Nations emphasis but identified an awkward alignment in the services section. The recovery heading, explanatory copy and link now stack along the same left edge. The First Nations note follows at the same reading width, separated by a subtle rule. This replaces the recovery section's split desktop columns; mobile follows the same reading order. Content and publication controls are unchanged.
+
+The alignment revision passed the explicit review build and its 19 HTML-file / 585 local-reference output checks. Hosted visual acceptance of the revised spacing remains pending.
