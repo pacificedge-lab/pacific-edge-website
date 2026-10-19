@@ -20,7 +20,10 @@ for(const file of files){
  check(/<link rel="canonical" href="https:\/\/thepacificedge.ca\//.test(html),'incorrect canonical domain');
  check(!html.includes('PE_ASSET_'),'unresolved image token');
  check(!html.includes('data-page='),'prototype-only page interaction remains');
- if(review)check(html.includes('noindex, nofollow'),'review page must not be indexed');
+ if(review){
+  check(html.includes('noindex, nofollow'),'review page must not be indexed');
+  check(html.includes('Website draft for review'),'review banner missing');
+ }
  if(!review){
   check(!html.includes('data-case-placeholder'),'case placeholder leaked into public output');
   check(!html.includes('Website draft for review'),'draft banner leaked into public output');
@@ -44,6 +47,14 @@ for(const file of files){
 const home=fs.readFileSync(path.join(directory,'index.html'),'utf8');
 for(const service of ['Strategy and direction','Operations and capability','Advisory and leadership'])assert(home.includes(service),'missing core service '+service);
 if(review){
+ const contact=fs.readFileSync(path.join(directory,'contact/index.html'),'utf8');
+ const form=contact.match(/<form\b[^>]*>/)?.[0];
+ assert(form&&form.includes('data-live="false"'),'review contact form must be disabled');
+ assert(!/\saction=/.test(form),'review contact form must have no submission URL');
+ const fields=[...contact.matchAll(/<(?:input|textarea|button)\b[^>]*>/g)];
+ assert(fields.length>=6&&fields.every(([tag])=>/\sdisabled(?:[\s=>])/.test(tag)),'all review contact fields and submit button must be disabled');
+ assert(contact.includes('Review preview: enquiries are not submitted.'),'review contact explanation missing');
+ assert(!contact.includes('src="https://challenges.cloudflare.com/turnstile/'),'review must not load the live verification widget');
  const advisory=fs.readFileSync(path.join(directory,'advisory/index.html'),'utf8');
  for(const id of ['fibre-delivery-operating-model','workforce-reporting-recovery']){
   const route='/work/'+id;

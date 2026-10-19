@@ -63,7 +63,7 @@ The initial hosted build used main and successfully deployed the earlier website
 
 In the Worker's Access settings, protect All traffic and restrict authentication to the Cloudflare account. Chris observed the Cloudflare sign-in prompt at the main workers.dev address on 18 October 2026. Repeat the unauthenticated check on the new Preview URL; a main-URL check alone does not verify every Preview URL.
 
-In Settings > Build > Builds for Preview branches, enable Preview URLs. Keep the root at / and the build command at npm run build. Set the Preview command to `npx --yes wrangler@4.151.1 preview`; this version was used by the initial Cloudflare deployment and supports Worker Previews. Add these build variables to the Preview build configuration, separately from production:
+In Settings > Build > Builds for Preview branches, enable Preview URLs. Keep the root at / and set the Preview build command to `npm run build:review`. Keep the production build command at `npm run build`. Set the Preview command to `npx --yes wrangler@4.151.1 preview`; this version was used by the initial Cloudflare deployment and supports Worker Previews. These build variables may remain in the Preview build configuration, separately from production; build:review explicitly sets them so review output does not depend on the dashboard flag being available:
 
 | Name | Value |
 | --- | --- |
@@ -72,6 +72,10 @@ In Settings > Build > Builds for Preview branches, enable Preview URLs. Keep the
 | ASTRO_TELEMETRY_DISABLED | 1 |
 
 The explicit previews block in wrangler.jsonc keeps CONTACT_FORM_ENABLED false. Preview variables and resource bindings do not inherit production settings; assets stay at the top level. No email or rate-limit binding is configured for this website-only Preview, and no Turnstile secret is required. The contact handler fails closed without live configuration.
+
+A hosted retry at 18:22 Vancouver time on 18 October still emitted production-mode content while using the correct feature branch and Preview deploy command. The log does not expose the effective SITE_REVIEW build value, so the exact dashboard-variable cause is unconfirmed. The explicit build:review command supplies the flags to both Astro child processes, then runs output checks that require the review banner, noindex metadata, review-only case routes and disabled contact controls. A missing review mode now fails the build before the Preview deploy command can run. The script adds no dependencies and disables Astro telemetry for its child processes.
+
+Local validation of build:review started with conflicting SITE_REVIEW=false and PUBLIC_CONTACT_ENABLED=true values. Astro check reported zero diagnostics across 37 files; the forced review build passed 19 HTML-file and 585 local-reference checks, including the new banner and contact assertions. A separate production build passed the existing production publication checks. These local results do not establish the outcome of the next hosted build.
 
 After saving the build settings, build feature/coastal-editorial-site and verify that the build reports that branch and the expected commit, runs the Preview command, and emits the Coastal Editorial routes including advisory, ai, first-nations and privacy. Open the returned Preview URL in a fresh private browser session to verify the login gate, then sign in and inspect the site. Contact fields must remain disabled with the review explanation visible. Do not connect the public domain or activate email delivery as part of this review.
 

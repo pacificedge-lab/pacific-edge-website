@@ -6,7 +6,7 @@ Coastal Editorial website draft for thepacificedge.ca. Astro, TypeScript, Markdo
 
 Run npm ci, then npm run dev. Development includes clearly labelled review content.
 
-Run npm run build for production output, followed by npm run preview. To review the full draft in a static build, set SITE_REVIEW=true before building. The review includes noindex metadata; it still needs local or private hosting. See docs/coastal-editorial-review.md for outstanding content and acceptance.
+Run npm run build for production output, followed by npm run preview. Run npm run build:review for the full draft: it explicitly enables review mode, disables contact submission and validates the generated output before deployment. The review includes noindex metadata; it still needs local or private hosting. See docs/coastal-editorial-review.md for outstanding content and acceptance.
 
 ## Content
 
