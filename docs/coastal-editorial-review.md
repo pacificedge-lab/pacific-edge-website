@@ -14,7 +14,7 @@ Approved design direction from Chris McLean on 15 October 2026. Implements Websi
 
 ## Review modes
 
-Development shows review content. For a production-style review build, set SITE_REVIEW=true before npm run build. It adds a draft banner, noindex metadata, an empty sitemap, the ISEF review entry and the two anonymized case accounts. Noindex is not access control: keep the review build local or behind real private access.
+Development shows review content. For a production-style review build, run `npm run build:review`. It explicitly enables review mode, disables the contact form and validates the output. The build includes a draft banner, noindex metadata, an empty sitemap, the ISEF review entry and the two anonymized case accounts. Noindex is not access control: keep the review build local or behind real private access.
 
 A default production build excludes unpublished collection items and the work placeholders. Unconfirmed partner links are omitted. Contact inputs are always disabled in review. Public output offers direct email while form switches and the Turnstile key remain unconfigured.
 
@@ -99,3 +99,11 @@ The public mailbox is confirmed operational. The form now has a Worker submissio
 - Browser layout checks passed for 13 routes at 1440, 736, 390 and 320 pixels, with no overflow, clipped content, broken images, failed requests or script exceptions. Mobile navigation passed.
 - Review mode kept the form disabled even with the public enable switch and a synthetic Turnstile sitekey supplied. The standalone 13-page preview passed page, imagery and case-navigation checks.
 - Release checks continue to block publication pending real Cloudflare configuration, hosted delivery acceptance and final content approval. Local checks do not verify account availability or email receipt.
+
+## Homepage positioning - 18 October 2026
+
+Chris clarified that First Nations work is relevant experience, but Pacific Edge is not being positioned primarily as a First Nations consultancy. The homepage now leads with the broad strategy, operations and leadership offer, followed by selected experience and AI and automation. The large First Nations image section is replaced by a short linked paragraph within the services section. The dedicated First Nations page and navigation link remain available; Labs retains its proportionate ISEF reference.
+
+Chris confirmed that the hosted review banner, draft case accounts and disabled contact form are now present after updating the existing feature Preview's own settings. Previews Base settings alone did not update that existing Preview. For future build-setting changes, check the specific Preview configuration as well as Base.
+
+Validation: Astro check returned zero diagnostics across 37 files. Review output passed 19 HTML-file and 585 local-reference checks; production output passed 13 HTML-file and 360 local-reference checks. These checks cover publication controls and links. The revised homepage still needs visual inspection on the hosted Preview; a browser connection was not available for this change.
