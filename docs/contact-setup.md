@@ -56,3 +56,23 @@ Confirm that one real submission produces one notification in hello@, that Reply
 After acceptance, update the production switches, build with review disabled and run release:check with CONTACT_DELIVERY_VERIFIED=true and SITE_CONTENT_APPROVED=true. These are explicit acceptance records, not automatic evidence that delivery works. Review the final build before publication.
 
 No Cloudflare resources, DNS records, secrets or mailbox settings have been changed by this implementation. Live sending and deployment remain pending.
+
+## Protected website review on Cloudflare
+
+The initial hosted build used main and successfully deployed the earlier website foundation. The current Coastal Editorial design remains on feature/coastal-editorial-site. Keep main as the production branch; use a branch Preview for this design until publication is approved.
+
+In the Worker's Access settings, protect All traffic and restrict authentication to the Cloudflare account. Chris observed the Cloudflare sign-in prompt at the main workers.dev address on 18 October 2026. Repeat the unauthenticated check on the new Preview URL; a main-URL check alone does not verify every Preview URL.
+
+In Settings > Build > Builds for Preview branches, enable Preview URLs. Keep the root at / and the build command at npm run build. Set the Preview command to `npx --yes wrangler@4.151.1 preview`; this version was used by the initial Cloudflare deployment and supports Worker Previews. Add these build variables to the Preview build configuration, separately from production:
+
+| Name | Value |
+| --- | --- |
+| SITE_REVIEW | true |
+| PUBLIC_CONTACT_ENABLED | false |
+| ASTRO_TELEMETRY_DISABLED | 1 |
+
+The explicit previews block in wrangler.jsonc keeps CONTACT_FORM_ENABLED false. Preview variables and resource bindings do not inherit production settings; assets stay at the top level. No email or rate-limit binding is configured for this website-only Preview, and no Turnstile secret is required. The contact handler fails closed without live configuration.
+
+After saving the build settings, build feature/coastal-editorial-site and verify that the build reports that branch and the expected commit, runs the Preview command, and emits the Coastal Editorial routes including advisory, ai, first-nations and privacy. Open the returned Preview URL in a fresh private browser session to verify the login gate, then sign in and inspect the site. Contact fields must remain disabled with the review explanation visible. Do not connect the public domain or activate email delivery as part of this review.
+
+The previews configuration follows https://developers.cloudflare.com/workers/previews/configuration/ and https://developers.cloudflare.com/workers/ci-cd/builds/build-branches/ . Hosted acceptance remains required; local Astro and output checks do not validate Cloudflare provisioning or Access policy enforcement.
