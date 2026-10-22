@@ -1,6 +1,14 @@
 # Coastal Editorial implementation review
 
-Approved design direction from Chris McLean on 15 October 2026. Implements Website Brief revision 0.6 and Copy Draft 0.6, with later revisions recorded below. Chris approved merge/publication on 22 October 2026, then paused publication to complete the contact form setup and hosted delivery acceptance first. Earlier pending-approval notes below record the historical review state.
+Approved design direction from Chris McLean on 15 October 2026. Implements Website Brief revision 0.6 and Copy Draft 0.6, with later revisions recorded below.
+
+## Current launch acceptance — 22 October 2026
+
+Chris approved merge/publication, completed protected Preview contact acceptance, and PR #5 was merged as d76584f and deployed to Cloudflare production. The public domain is https://thepacificedge.ca. Both approved experience accounts and the reviewed ISEF overview are published; draft Ideas and unconfirmed partners remain excluded.
+
+Production contact initially failed because TURNSTILE_SECRET_KEY was stored only as a build secret. After diagnostic release 40a8d2e identified PE03 and Chris added the Production runtime secret, he confirmed the configuration check, production delivery and Reply-To. This is user-reported hosted acceptance, not an independent agent browser or mailbox inspection. See docs/contact-setup.md for the operational record.
+
+The www redirect remains to be configured and verified as a separate Cloudflare zone rule. The preparation and pending-approval notes below are historical and are superseded by this launch record where they conflict.
 
 ## Repository review and retained foundation
 

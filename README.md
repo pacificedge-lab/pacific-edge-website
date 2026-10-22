@@ -1,6 +1,8 @@
 # Pacific Edge Website
 
-Coastal Editorial website draft for thepacificedge.ca. Astro, TypeScript, Markdown collections, self-hosted fonts and static output for Cloudflare Workers Static Assets.
+Pacific Edge's Coastal Editorial website at https://thepacificedge.ca. Astro, TypeScript, Markdown collections, self-hosted fonts and static output for Cloudflare Workers Static Assets.
+
+PR #5 was merged and deployed on 22 October 2026. Chris confirmed production contact delivery and Reply-To after configuring the Turnstile runtime secret. See docs/contact-setup.md for the acceptance record and remaining www redirect setup.
 
 ## Development and review
 
@@ -17,8 +19,8 @@ Run npm run build for production output, followed by npm run preview. Run npm ru
 
 ## Contact and launch
 
-The confirmed public mailbox is hello@thepacificedge.ca. A Cloudflare Worker handles /api/contact with Turnstile, rate limiting and restricted email delivery. Both build-time and runtime switches default to disabled. Review builds always remain non-submitting; production offers direct email until the form is activated. See docs/contact-setup.md for account configuration, local checks and hosted acceptance. Copy .env.example to .env for local build configuration.
+The public mailbox is hello@thepacificedge.ca. A Cloudflare Worker handles /api/contact with Turnstile, rate limiting and restricted email delivery. Production builds and the production Worker enable the form. Ordinary review builds disable submission; the protected contact-test build is an explicit exception. TURNSTILE_SECRET_KEY must be a production runtime secret; a build secret alone is insufficient. See docs/contact-setup.md for configuration and acceptance. Copy .env.example to .env for local build configuration.
 
 Run npm run release:check against a completed production build with the same environment used at build time. SITE_CONTENT_APPROVED=true records that the content checklist has been completed. The check intentionally fails until contact and content requirements are fulfilled. CONTACT_DELIVERY_VERIFIED=true records completion of the hosted acceptance described in docs/contact-setup.md. Verify delivery before enabling the production form.
 
-No website deployment, DNS change or merge into main is implied by this draft.
+Pushes to main trigger the connected Cloudflare production build and deployment. wrangler.jsonc retains the apex custom domain. The www-to-apex redirect is a separate Cloudflare zone rule and is not managed by this repository.

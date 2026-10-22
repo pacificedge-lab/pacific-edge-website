@@ -1,6 +1,16 @@
 # Contact form setup
 
-Current production status, 22 October: PR #5 was merged as d76584f and its Cloudflare production build succeeded. Chris reported saving the production secret and attached thepacificedge.ca as a Production custom domain after removing the two conflicting apex A records. His production-origin form attempt still returned the pre-send unavailable message. Production delivery is not accepted yet. The references below support a no-submission check without exposing credentials.
+## Current production acceptance — 22 October 2026
+
+PR #5 was merged as d76584f and its Cloudflare production build succeeded. Chris attached thepacificedge.ca as a Production custom domain after removing only the two conflicting apex A records, retaining the existing mail records. The apex custom domain is also declared in wrangler.jsonc so future deployments retain it.
+
+The first production form attempt returned unavailable. The subsequent diagnostic release, 40a8d2e, deployed successfully and GET /api/contact reported PE03: the Worker could not see TURNSTILE_SECRET_KEY. Chris confirmed that the existing value was a build secret, then added it under Production Runtime variables and secrets. After the deployment step, he explicitly confirmed the configuration check, production email receipt and Reply-To checks: "All confirmed - we're good". Production delivery is accepted on that user-reported basis. No agent submission or independent browser/mailbox inspection was performed, and the private secret was never received or recorded.
+
+Remaining domain task: configure and verify the Cloudflare www.thepacificedge.ca-to-thepacificedge.ca redirect, preserving paths and query strings. The existing proxied www CNAME can remain. This zone rule is outside Wrangler source.
+
+## Historical setup notes
+
+The chronological notes below preserve earlier preparation states. Statements about pending publication or production acceptance are superseded by the current acceptance record above.
 
 The public mailbox is hello@thepacificedge.ca. Chris confirmed that it is operational on 18 October 2026. The website implementation uses a Cloudflare Worker at /api/contact, native email sending, Turnstile and a rate-limiting binding. On 22 October, Chris reported a successful protected Preview submission and explicitly confirmed receipt at hello@ and that Reply targets the entered visitor address. Production source activation is prepared; the production runtime secret, merge, domain connection and public acceptance remain pending.
 
@@ -22,7 +32,7 @@ The handler does not create an enquiry database, write submitted content to appl
 
 1. Onboard forms.thepacificedge.ca in Email Sending, using the forms subdomain under the thepacificedge.ca zone. Follow the sending-domain DNS instructions and preserve the apex Google Workspace MX and existing DMARC records. Confirm that the sending domain is verified; a working destination mailbox alone does not verify it.
 2. Verify hello@thepacificedge.ca as the destination address and retain the CONTACT_EMAIL binding's destination restriction. Confirm that the binding supports the structured send API used in worker/index.js.
-3. Create a managed Turnstile widget for the intended hostname. The public sitekey goes into PUBLIC_TURNSTILE_SITE_KEY at build time. Store the private secret using `wrangler secret put TURNSTILE_SECRET_KEY`; never put it in PUBLIC_ variables or source control.
+3. Create a managed Turnstile widget for the intended hostname. The public sitekey goes into PUBLIC_TURNSTILE_SITE_KEY at build time. Store the private secret under the production Worker's Runtime variables and secrets, then deploy, or use `wrangler secret put TURNSTILE_SECRET_KEY`. A build secret alone does not configure the production runtime. Never put it in PUBLIC_ variables or source control.
 4. Confirm the rate-limit namespace is unused by unrelated Workers, or select a different positive integer namespace in wrangler.jsonc.
 5. Keep SITE_ORIGIN aligned with the actual site origin. The production value is https://thepacificedge.ca. Redirect other hostnames to that canonical origin. A private staging site needs its own origin and permitted Turnstile hostname.
 6. Review the enquiry privacy wording against the actual Cloudflare and mailbox setup.

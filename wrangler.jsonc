@@ -3,6 +3,10 @@
   "name": "pacific-edge-website",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-17",
+  "routes": [{
+    "pattern": "thepacificedge.ca",
+    "custom_domain": true
+  }],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
