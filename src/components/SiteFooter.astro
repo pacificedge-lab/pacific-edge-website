@@ -1,20 +1,8 @@
-<footer class="site-footer">
-  <div class="shell footer-grid">
-    <div>
-      <a class="wordmark wordmark--footer" href="/">PACIFIC EDGE</a>
-      <p>Clarity at the edge of complexity.</p>
-    </div>
-    <nav aria-label="Footer navigation">
-      <a href="/work">Work</a>
-      <a href="/capabilities">Capabilities</a>
-      <a href="/labs">Labs</a>
-      <a href="/ideas">Ideas</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-    </nav>
-    <div class="footer-meta">
-      <p>Vancouver, British Columbia<br />Canada</p>
-      <p>© {new Date().getFullYear()} Pacific Edge</p>
-    </div>
-  </div>
-</footer>
+---
+import {getCollection} from 'astro:content';
+import {isReview,visible,partnerVisible} from '../lib/content';
+const hasWork=(await getCollection('work')).some(visible);
+const hasPartners=(await getCollection('partners')).some(partnerVisible);
+---
+<footer class="pe-footer pe-shell"><div><a class="pe-wordmark" href="/" aria-label="Pacific Edge home"><strong>PACIFIC</strong><span>EDGE</span></a><p>Clarity at the edge of complexity.</p><small>Based in Vancouver, Canada.</small></div>
+<nav aria-label="Footer navigation"><a href="/advisory">Advisory</a><a href="/ai">AI & automation</a><a href="/first-nations">First Nations and Indigenous organizations</a>{(hasWork||isReview)&&<a href="/work">Selected work</a>}<a href="/labs">Labs</a><a href="/about">About</a>{(hasPartners||isReview)&&<a href="/partners">Partners</a>}<a href="/contact">Contact</a><a href="/privacy">Privacy</a></nav></footer>

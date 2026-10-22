@@ -1,8 +1,8 @@
 ---
 title: Rebuilding a legacy workflow product around modern operations
 summary: Recovering valuable product logic from a constrained legacy implementation and redesigning it around evidence, accountability and future extensibility.
-status: draft
-featured: true
+status: archived
+featured: false
 domains:
   - Operations
   - Product

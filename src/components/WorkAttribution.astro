@@ -1,0 +1,15 @@
+---
+interface Props {
+  organization?: string;
+  attribution?: string;
+}
+const { organization, attribution } = Astro.props;
+const context = organization ? organization.charAt(0).toLowerCase() + organization.slice(1) : undefined;
+const caption = attribution && context
+  ? `From ${attribution} with a ${context}.`
+  : attribution || organization;
+---
+{caption && <aside class="pe-work-attribution" aria-label="Experience context">
+  <p class="pe-attribution-label">Experience context</p>
+  <p class="pe-attribution-copy">{caption}</p>
+</aside>}

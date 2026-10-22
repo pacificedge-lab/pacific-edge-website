@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<BaseLayout title="Enquiry Privacy - Pacific Edge" description="How Pacific Edge uses information submitted through website enquiries.">
+ <PageHero title="Enquiry privacy" lead="How we use the information you share when contacting Pacific Edge." eyebrow="Privacy" image="coast" cta={false}/>
+ <div class="pe-page-grid"><aside class="pe-contents"><strong>Contact</strong><a href="mailto:hello@thepacificedge.ca">hello@thepacificedge.ca</a></aside><article class="pe-prose">
+ <h2>Information you provide</h2>
+ <p>The enquiry form asks for your name, email address, an optional organization and a message. Please keep initial enquiries general and avoid including confidential client, student or other sensitive information.</p>
+ <h2>How we use it</h2>
+ <p>Pacific Edge uses this information to respond to your enquiry, discuss whether we can help and manage any resulting business correspondence. Submitting an enquiry does not subscribe you to marketing emails.</p>
+ <h2>Processing and storage</h2>
+ <p>The website uses Cloudflare to process form submissions, check for automated abuse and deliver enquiry notifications to our email account. Our email provider processes and stores the resulting correspondence. The form does not create a separate database of enquiries.</p>
+ <p>Cloudflare's spam protection and rate limiting process technical information about requests, including network information. Enquiry messages are not intentionally written to application logs.</p>
+ <h2>Keeping and accessing correspondence</h2>
+ <p>We retain enquiry correspondence for as long as needed to respond and manage any resulting business relationship. To ask about information you have provided, request a correction or discuss deletion, email <a href="mailto:hello@thepacificedge.ca">hello@thepacificedge.ca</a>.</p>
+ </article></div>
+</BaseLayout>

@@ -1,26 +1,16 @@
-# Pacific Edge Brand Tokens
+# Coastal Editorial web tokens
 
-## Core palette
+Approved composition: Coastal Editorial, 15 October 2026. The web implementation uses these canonical CSS tokens in src/styles/global.css:
 
-- Abyss Ink — `#1A1F22`
-- Mineral White — `#F3F0EA`
-- Storm Slate — `#3B474C`
-- Mist Stone — `#D9D4CB`
-- Weathered Taupe — `#A79F93`
-- Pacific Oxide — `#4F6B6A`
-- Aged Bronze — `#8A6F58`
+| Token | Value | Use |
+| --- | --- | --- |
+| Ink | #081726 | Header, opening and closing |
+| Fjord | #132739 | AI feature |
+| Ocean | #2e6573 | Links and emphasis |
+| Tide | #49a9a7 | Small accents and focus |
+| Paper | #f5f1e8 | Reading background |
+| Mist | #e4e8e5 | Selected work and Labs |
+| Sand | #d8c7af | Reserved supporting token |
+| Copper | #c17855 | Recovery separator |
 
-## Typography
-
-- Editorial: Source Serif 4
-- Interface: Inter
-
-## Visual principle
-
-Quiet authority. The identity should derive from typography, composition, imagery, and restraint rather than decorative effects.
-
-## Wordmark
-
-Primary form: `PACIFIC EDGE`
-
-The wordmark is the master identity. A standalone symbol is not required for launch.
+Display headings: self-hosted Source Serif 4. Body, navigation and controls: self-hosted Inter. The supplied kit, earlier site and study used different font implementations; this preserves the approved editorial character while reusing the repository's local font packages.
