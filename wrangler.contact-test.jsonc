@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "pacific-edge-website",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-17",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/contact"]
+  },
+  "vars": {
+    "SITE_ORIGIN": "https://thepacificedge.ca",
+    "CONTACT_FORM_ENABLED": "false"
+  },
+  "previews": {
+    "vars": {
+      "SITE_ORIGIN": "https://feature-coastal-editorial-site-pacific-edge-website.lucky-firefly-596b.workers.dev",
+      "CONTACT_FORM_ENABLED": "true"
+    },
+    "send_email": [{
+      "name": "CONTACT_EMAIL",
+      "destination_address": "hello@thepacificedge.ca"
+    }],
+    "ratelimits": [{
+      "name": "CONTACT_LIMITER",
+      "namespace_id": "248796301",
+      "simple": { "limit": 5, "period": 60 }
+    }]
+  }
+}

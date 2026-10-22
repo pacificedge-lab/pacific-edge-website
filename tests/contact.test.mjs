@@ -19,7 +19,7 @@ test('verified enquiry goes only to the confirmed mailbox with fixed sender and 
  const response=await handleContact(request({to:'other@example.net',from:'spoof@example.net'}),h.env,h.fetchImpl);
  assert.equal(response.status,200);assert.equal((await response.json()).ok,true);
  assert.equal(h.sent.length,1);assert.equal(h.sent[0].to,'hello@thepacificedge.ca');
- assert.equal(h.sent[0].from.email,'hello@thepacificedge.ca');assert.equal(h.sent[0].replyTo.email,fields.email);
+ assert.equal(h.sent[0].from.email,'website@forms.thepacificedge.ca');assert.equal(h.sent[0].replyTo.email,fields.email);
  assert.equal(h.sent[0].subject,'Pacific Edge website enquiry');assert(h.sent[0].text.includes(fields.message));
  assert(!h.sent[0].text.includes('192.0.2.1'));assert(!h.sent[0].text.includes('synthetic-secret'));
  assert.equal(h.verified[0].body.response,'synthetic-token');assert.equal(response.headers.get('cache-control'),'no-store');

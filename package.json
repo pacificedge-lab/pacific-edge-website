@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "build:review": "node scripts/build-review.mjs",
+    "build:contact-test": "node scripts/build-review.mjs --contact-test",
     "preview": "astro preview",
     "check": "astro check",
     "test:contact": "node --test tests/contact.test.mjs",

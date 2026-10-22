@@ -2,13 +2,15 @@
 
 The public mailbox is hello@thepacificedge.ca. Chris confirmed that it is operational on 18 October 2026. The website implementation uses a Cloudflare Worker at /api/contact, native email sending, Turnstile and a rate-limiting binding. Both the public form and Worker delivery are disabled until hosted acceptance is complete.
 
+On 22 October, Chris verified hello@thepacificedge.ca as a Cloudflare destination and subsequently confirmed access to paid Email Sending. Apex sending-domain onboarding proposed changing the existing DMARC policy, so the selected sending domain is forms.thepacificedge.ca. Chris's revised DNS review lists MX and SPF at cf-bounce.forms.thepacificedge.ca, DKIM at cf-bounce._domainkey.forms.thepacificedge.ca and DMARC at _dmarc.forms.thepacificedge.ca. His subsequent dashboard capture reports Sending status Enabled and DNS records Configured. Independent DNS reads confirm the subdomain bounce MX and DMARC records, while the apex Google Workspace MX and original quarantine DMARC policy remain unchanged. The local Worker now sends from website@forms.thepacificedge.ca to hello@thepacificedge.ca; all 18 simulated contact-handler tests pass. Turnstile configuration, deployment and live form delivery remain pending.
+
 ## What is implemented
 
 - Four visitor fields: name, email, optional organization and message, with matching browser and server length limits.
 - Same-origin POST handling, a bounded request body, duplicate-field rejection and a hidden spam field.
 - Server-side Turnstile verification that checks success, the configured hostname and the contact action.
 - A per-IP rate-limiting binding set to five attempts per minute. Namespace 1001 must be checked for uniqueness within the Cloudflare account before deployment.
-- A fixed recipient and sender of hello@thepacificedge.ca. Visitor data supplies only the Reply-To address and plain-text message content. The handler is not an email relay.
+- A fixed recipient of hello@thepacificedge.ca and sender of website@forms.thepacificedge.ca. Visitor data supplies only the Reply-To address and plain-text message content. The handler is not an email relay.
 - Confirmation only after the email service returns a message ID. Errors do not report success, retry automatically or clear the visitor's message.
 - A direct email option and an enquiry privacy page. Review builds never enable submission or load the Turnstile widget, even if live configuration values are present.
 
@@ -16,7 +18,7 @@ The handler does not create an enquiry database, write submitted content to appl
 
 ## Cloudflare account configuration
 
-1. Confirm that Email Sending is available on the account and onboard thepacificedge.ca as a sending domain. Follow the sending-domain DNS instructions and preserve the existing provider's incoming-mail configuration. A working mailbox alone does not verify the sending domain.
+1. Onboard forms.thepacificedge.ca in Email Sending, using the forms subdomain under the thepacificedge.ca zone. Follow the sending-domain DNS instructions and preserve the apex Google Workspace MX and existing DMARC records. Confirm that the sending domain is verified; a working destination mailbox alone does not verify it.
 2. Verify hello@thepacificedge.ca as the destination address and retain the CONTACT_EMAIL binding's destination restriction. Confirm that the binding supports the structured send API used in worker/index.js.
 3. Create a managed Turnstile widget for the intended hostname. The public sitekey goes into PUBLIC_TURNSTILE_SITE_KEY at build time. Store the private secret using `wrangler secret put TURNSTILE_SECRET_KEY`; never put it in PUBLIC_ variables or source control.
 4. Confirm the rate-limit namespace is unused by unrelated Workers, or select a different positive integer namespace in wrangler.jsonc.
@@ -32,6 +34,8 @@ The implementation follows these primary references:
 - https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/
 
 ## Build and runtime switches
+
+Chris supplied the public Turnstile sitekey 0x4AAAAAAFhZOFMZaIq7bLvM on 22 October. It is the source default and is shown in .env.example; PUBLIC_TURNSTILE_SITE_KEY can override it. His subsequent capture confirms an encrypted TURNSTILE_SECRET_KEY on the existing feature/coastal-editorial-site Preview. Its value is not exposed or independently verified. The production secret still needs separate configuration. Changing Previews Base alone does not update an existing Preview. The widget's allowed hostnames have not been independently confirmed. Production activation switches remain false.
 
 PUBLIC_CONTACT_ENABLED and PUBLIC_TURNSTILE_SITE_KEY control the static form at build time. CONTACT_FORM_ENABLED in wrangler.jsonc controls the Worker. Both switches must be true for live operation. Each defaults to false; review mode overrides the public switch and leaves the form disabled.
 
@@ -50,6 +54,10 @@ Browser verification of the enabled form uses synthetic input and intercepted Tu
 ## Hosted acceptance before activation
 
 Use an approved private staging deployment with a real Turnstile key and secret and the account's verified email binding. Enable both form switches for that deployment. A live delivery test must be explicitly authorized before sending an email.
+
+For the existing feature Preview, set its build command to `npm run build:contact-test` and Preview command to `npx --yes wrangler@4.151.1 preview --config wrangler.contact-test.jsonc`. First verify in a signed-out/private browser that its stable URL requires Cloudflare authentication; retain Access protection for all traffic during acceptance. The dedicated build keeps review content, the review banner and noindex metadata, but enables the form and displays a real-notification test notice. Ordinary `build:review` forces the test flag false and keeps submission disabled, including when inherited environment values request otherwise. The standalone test Wrangler configuration supplies the exact stable Preview origin, restricted email destination and separate rate-limit namespace 248796301; do not reuse that namespace for unrelated Workers. It contains no production email binding or enabled production form. Use this config with `wrangler preview` only. The default Wrangler configuration remains unchanged and disabled.
+
+After the test build succeeds, Chris can submit one clearly labelled synthetic enquiry from the protected stable Preview contact page. A unique deployment URL has a different origin and is intentionally rejected by this configuration. Record receipt, Reply-To and the browser result before treating delivery as verified. No test notification has yet been sent. Return to `npm run build:review` and the normal Preview command after acceptance unless continued protected form testing is needed.
 
 Confirm that one real submission produces one notification in hello@, that Reply-To addresses the visitor correctly, and that success appears only after acceptance by the email service. Check spam filtering and reply behavior in the mailbox. Also check invalid verification, expired tokens, rate limiting and an unavailable email binding. Failure must retain the entered message and provide a direct email option.
 

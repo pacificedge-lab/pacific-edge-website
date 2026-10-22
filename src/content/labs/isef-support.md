@@ -1,7 +1,7 @@
 ---
 title: ISEF Support
 summary: A tool for Indigenous education teams, developed to support program administration and reporting.
-status: review
+status: published
 featured: true
 projectType: product
 developmentStatus: Preparing for launch

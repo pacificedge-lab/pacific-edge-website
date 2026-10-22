@@ -3,7 +3,7 @@ title: Recovering reporting in a constrained implementation
 summary: Recovering vendor data for first-wave participation reporting and workforce forecasting during a constrained software implementation.
 organization: Major provincial health organization
 attribution: Chris McLean's prior professional experience
-status: review
+status: published
 featured: true
 domains:
   - Operations and capability

@@ -1,6 +1,6 @@
 # Coastal Editorial implementation review
 
-Approved design direction from Chris McLean on 15 October 2026. Implements Website Brief revision 0.6 and Copy Draft 0.6. This branch is a review draft; it is not a launch approval.
+Approved design direction from Chris McLean on 15 October 2026. Implements Website Brief revision 0.6 and Copy Draft 0.6, with later revisions recorded below. Chris approved merge/publication on 22 October 2026, then paused publication to complete the contact form setup and hosted delivery acceptance first. Earlier pending-approval notes below record the historical review state.
 
 ## Repository review and retained foundation
 
@@ -119,3 +119,11 @@ Following the independent review of 7cce3f3, Chris supplied two concrete example
 The case summaries and result sections now describe these uses. The workforce account does not claim that Chris authored the downstream forecasting models, that reporting increased participation or that the intervention recovered the whole implementation. The fibre account makes no claim about revenue, full-chain production adoption or the venture's ultimate commercial outcome. Both entries retain review status and prior-experience attribution.
 
 Chris subsequently clarified the participation comparison: approximately 65% of annual vacation planning was completed in the first planning pass, compared with around 20–30% in previous annual rounds. More planning was completed earlier and fewer rounds were needed overall. The workforce result section now includes that approximate comparison as an outcome demonstrated by the recovered reporting. It does not attribute the completion improvement itself to the R solution. No employee-count denominator or exact number of rounds is asserted.
+
+## Launch preparation paused for form acceptance - 22 October 2026
+
+Chris approved the website appearance and merging/publication, then requested that publication pause while the form Worker is completed. No merge or public-domain change has been made. The two case accounts and reviewed ISEF overview are marked published, with output checks updated to retain them in production once launch resumes. These approved publication changes are included in the feature-branch form-acceptance preparation; main and public launch remain on hold.
+
+The temporary email-only launch preparation was withdrawn. The existing form Worker, disabled switches, email/rate-limit bindings, form-specific privacy wording and release requirements are retained. Complete Cloudflare sending setup, destination verification, managed Turnstile configuration and one authorized hosted delivery acceptance before enabling the form and resuming publication. No form email has been sent in this continuation.
+
+Cloudflare sending is now enabled for forms.thepacificedge.ca, with the apex Google Workspace MX and existing DMARC unchanged. The Worker sender is website@forms.thepacificedge.ca; hello@thepacificedge.ca remains the fixed recipient. The supplied public Turnstile key is in source and an encrypted secret is visible on the existing feature Preview. A dedicated protected contact-test build and Preview configuration retain the banner/noindex while enabling real form submission for acceptance. Ordinary reviews and production remain disabled. See docs/contact-setup.md for the commands, Access prerequisite and outstanding delivery/Reply-To checks.

@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 
-const review=process.argv.includes('--review');
+const contactTest=process.argv.includes('--contact-test');
+const review=process.argv.includes('--review')||contactTest;
 const directory=path.resolve('dist');
 const files=fs.readdirSync(directory,{recursive:true}).filter(file=>file.endsWith('.html'));
 const failures=[];
@@ -46,7 +47,26 @@ for(const file of files){
 }
 const home=fs.readFileSync(path.join(directory,'index.html'),'utf8');
 for(const service of ['Strategy and direction','Operations and capability','Advisory and leadership'])assert(home.includes(service),'missing core service '+service);
-if(review){
+const advisory=fs.readFileSync(path.join(directory,'advisory/index.html'),'utf8');
+for(const id of ['fibre-delivery-operating-model','workforce-reporting-recovery']){
+ const route='/work/'+id;
+ assert(resolveRoute(route),'approved case account missing: '+route);
+ assert(home.includes('href="'+route+'"'),'homepage case link missing: '+route);
+ assert(advisory.includes('href="'+route+'"'),'advisory case link missing: '+route);
+ const account=fs.readFileSync(resolveRoute(route),'utf8');
+ assert(account.replaceAll('&#39;', "'").includes("Chris McLean's prior professional experience"),'prior-experience attribution missing: '+route);
+}
+assert(resolveRoute('/labs/isef-support'),'approved ISEF entry missing');
+if(contactTest){
+ const contact=fs.readFileSync(path.join(directory,'contact/index.html'),'utf8');
+ const form=contact.match(/<form\b[^>]*>/)?.[0];
+ assert(form&&form.includes('data-live="true"')&&form.includes('action="/api/contact"'),'contact test form must submit to the contact handler');
+ assert(contact.includes('Contact form test: submitting this form sends a real notification'),'real-delivery test notice missing');
+ assert(contact.includes('src="https://challenges.cloudflare.com/turnstile/v0/api.js"'),'contact test must load Turnstile');
+ assert(/data-sitekey="[^"]+"/.test(contact),'contact test needs a public sitekey');
+ const fields=[...contact.matchAll(/<(?:input|textarea|button)\b[^>]*>/g)];
+ assert(fields.length>=6&&fields.every(([tag])=>!/\sdisabled(?:[\s=>])/.test(tag)),'contact test controls must be enabled');
+}else if(review){
  const contact=fs.readFileSync(path.join(directory,'contact/index.html'),'utf8');
  const form=contact.match(/<form\b[^>]*>/)?.[0];
  assert(form&&form.includes('data-live="false"'),'review contact form must be disabled');
@@ -55,26 +75,12 @@ if(review){
  assert(fields.length>=6&&fields.every(([tag])=>/\sdisabled(?:[\s=>])/.test(tag)),'all review contact fields and submit button must be disabled');
  assert(contact.includes('Review preview: enquiries are not submitted.'),'review contact explanation missing');
  assert(!contact.includes('src="https://challenges.cloudflare.com/turnstile/'),'review must not load the live verification widget');
- const advisory=fs.readFileSync(path.join(directory,'advisory/index.html'),'utf8');
- for(const id of ['fibre-delivery-operating-model','workforce-reporting-recovery']){
-  const route='/work/'+id;
-  assert(resolveRoute(route),'review case account missing: '+route);
-  assert(home.includes('href="'+route+'"'),'homepage case link missing: '+route);
-  assert(advisory.includes('href="'+route+'"'),'advisory case link missing: '+route);
-  const account=fs.readFileSync(resolveRoute(route),'utf8');
-  assert(account.replaceAll('&#39;', "'").includes("Chris McLean's prior professional experience"),'prior-experience attribution missing: '+route);
- }
  assert(!home.includes('data-case-placeholder'),'supplied case accounts must replace homepage placeholders');
- assert(resolveRoute('/labs/isef-support'),'ISEF review entry missing');
 }else{
- for(const id of ['fibre-delivery-operating-model','workforce-reporting-recovery']){
-  assert(!resolveRoute('/work/'+id),'review-only case account was emitted: '+id);
-  assert(!home.includes('/work/'+id),'unpublished case link was emitted: '+id);
- }
- assert(!resolveRoute('/labs/isef-support'),'unpublished ISEF entry was emitted');
+ for(const id of ['ai-readiness-operating-system','from-interest-to-capability','problem-beneath-workflow'])assert(!resolveRoute('/ideas/'+id),'draft idea was emitted: '+id);
  assert(!resolveRoute('/work/ai-operating-capability'),'archived work was emitted');
  assert(!resolveRoute('/labs/proposal-environment'),'archived internal portfolio was emitted');
  assert(!home.includes('href="/partners"'),'unconfirmed partner link emitted');
 }
 if(failures.length){console.error(failures.join('\n'));process.exitCode=1;}
-else console.log(`${review?'Review':'Production'} output passed: ${files.length} HTML files, ${links} local references, headings, metadata and publication checks.`);
+else console.log(`${contactTest?'Contact test':review?'Review':'Production'} output passed: ${files.length} HTML files, ${links} local references, headings, metadata and publication checks.`);

@@ -2,12 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import {isReview} from '../lib/content';
-import {contactEmail,validEmail,contactEndpoint,contactEnabled,privacyUrl,turnstileSiteKey} from '../lib/site';
+import {contactEmail,validEmail,contactEndpoint,contactEnabled,isContactTest,privacyUrl,turnstileSiteKey} from '../lib/site';
 ---
 <BaseLayout title="Contact — Pacific Edge" description="Discuss a strategic decision, operational challenge, AI initiative or need for leadership support with Pacific Edge.">
 <PageHero title="What are you working on?" lead="Tell us about the decision, challenge or initiative in front of you." eyebrow="Start a conversation" image="coast" cta={false}/>
 <section class="pe-shell pe-contact-grid"><div>
 <div class="pe-section-heading"><h2>Send an enquiry</h2><p>A short description is enough to start: what is happening, what you want to achieve and where you would value support.</p></div>
+{isContactTest&&<p class="pe-contact-status" role="note">Contact form test: submitting this form sends a real notification to hello@thepacificedge.ca. Use a clearly labelled test message.</p>}
 {(contactEnabled||isReview)&&<form class="pe-form" id="enquiry-form" data-live={contactEnabled?'true':'false'} action={contactEnabled?contactEndpoint:undefined} method="post" aria-describedby={!contactEnabled?'contact-status':'enquiry-guidance'}>
  <p id="enquiry-guidance">Please keep your initial enquiry general and avoid including confidential client, student or other sensitive information.</p>
  <label>Name<input type="text" name="name" required maxlength="100" autocomplete="name" disabled={!contactEnabled}/></label>

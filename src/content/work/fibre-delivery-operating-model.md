@@ -3,7 +3,7 @@ title: Designing a fibre delivery operating model
 summary: Integrating partner knowledge across the fibre delivery chain so go-to-market needs could inform engineering and construction planning.
 organization: Fibre-network infrastructure venture
 attribution: Chris McLean's prior professional experience
-status: review
+status: published
 featured: true
 domains:
   - Strategy and direction

@@ -1,4 +1,5 @@
 const MAILBOX = 'hello@thepacificedge.ca';
+const SENDER = 'website@forms.thepacificedge.ca';
 const MAX_BODY_BYTES = 65536;
 const messages = {
   sent: 'Your enquiry has been submitted. Thank you for getting in touch.',
@@ -102,7 +103,7 @@ export async function handleContact(request, env, fetchImpl = fetch) {
   try {
     const result = await env.CONTACT_EMAIL.send({
       to: MAILBOX,
-      from: { email: MAILBOX, name: 'Pacific Edge website' },
+      from: { email: SENDER, name: 'Pacific Edge website' },
       replyTo: { email, name },
       subject: 'Pacific Edge website enquiry',
       text: `Name: ${name}\nEmail: ${email}\nOrganization: ${organization || 'Not supplied'}\n\n${message}`,
