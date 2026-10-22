@@ -29,9 +29,9 @@ That work made the vendor extract usable for the reporting task. The data team's
 
 ## The result
 
-The processing solution made it possible to report on participation in the first wave of vacation planning. It also supplied data to workforce forecasting models, helping the organization identify expected pressure points and begin planning responses.
+The recovered reporting showed that approximately 65% of annual vacation planning was completed in the first planning pass, compared with around 20–30% in previous years. More planning was completed earlier, and fewer rounds were needed overall.
 
-This recovered information the organization needed for both implementation reporting and proactive workforce planning within the existing software constraints.
+The processed data also supplied inputs to workforce forecasting models, helping the organization identify expected pressure points and begin planning responses within the existing software constraints.
 
 [Explore operations and capability](/advisory#operations-and-capability)  
 [Discuss initiative recovery](/advisory#when-an-initiative-has-stalled)
