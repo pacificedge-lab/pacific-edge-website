@@ -153,6 +153,7 @@ html{scroll-behavior:smooth}body{margin:0;background:#081726}*{box-sizing:border
 #pe-site .pe-skip:focus{position:absolute;transform:none;min-height:44px}
 #pe-site a:focus-visible,#pe-site button:focus-visible,#pe-site summary:focus-visible{outline:3px solid var(--pe-tide);outline-offset:5px}
 #pe-site a:hover{text-decoration:underline;text-decoration-thickness:1px}
+#pe-site .pe-wordmark:hover{text-decoration:none}
 #pe-site .pe-nav a[aria-current=page]{border-bottom:1px solid var(--pe-tide);padding-bottom:7px}
 #pe-site .pe-review-note{background:var(--pe-mist);color:var(--pe-text);padding:10px 23px;font-size:12px;line-height:1.5;border-bottom:1px solid var(--pe-line)}
 #pe-site .pe-review-label{display:inline-block;color:var(--pe-ocean);font:500 11px/1.5 'Inter Variable',Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
