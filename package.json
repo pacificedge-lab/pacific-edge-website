@@ -8,9 +8,10 @@
     "build": "astro check && astro build",
     "build:review": "node scripts/build-review.mjs",
     "build:contact-test": "node scripts/build-review.mjs --contact-test",
+    "deploy:contact-test": "node scripts/deploy-contact-test.mjs",
     "preview": "astro preview",
     "check": "astro check",
-    "test:contact": "node --test tests/contact.test.mjs",
+    "test:contact": "node --test tests/contact.test.mjs tests/contact-deploy.test.mjs",
     "release:check": "node scripts/release-check.mjs",
     "check:output": "node scripts/check-output.mjs"
   },
