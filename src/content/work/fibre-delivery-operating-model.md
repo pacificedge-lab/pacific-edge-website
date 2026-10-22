@@ -1,6 +1,6 @@
 ---
 title: Designing a fibre delivery operating model
-summary: Bringing partner knowledge together into a shared framework for the entire fibre-network delivery chain, from business case to go-to-market.
+summary: Integrating partner knowledge across the fibre delivery chain so go-to-market needs could inform engineering and construction planning.
 organization: Fibre-network infrastructure venture
 attribution: Chris McLean's prior professional experience
 status: review
@@ -27,8 +27,10 @@ Chris developed a bespoke framework with input from the participating businesses
 
 The framework connected activities, responsibilities, handoffs and management requirements across the chain. It provided a shared reference for the partners and a structure for the management group company to oversee and coordinate the operation.
 
+A consequential change was bringing go-to-market planning earlier into the decision chain. Commercial requirements could then inform engineering and construction planning, connecting delivery choices with marketing and sales planning.
+
 ## The result
 
-The completed operating framework gave the partners a practical basis for understanding their contribution within the wider operation. It translated knowledge held across separate businesses into an explicit model of how the delivery ecosystem would work together.
+The completed framework translated knowledge held across separate businesses into a shared operating model. Bringing go-to-market needs into upstream decisions allowed the partners to shape engineering and construction plans around those requirements. The model gave commercial and delivery teams a practical basis for coordinating their plans across the full chain.
 
 [Explore strategy and direction](/advisory#strategy-and-direction)

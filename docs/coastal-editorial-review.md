@@ -111,3 +111,9 @@ Validation: Astro check returned zero diagnostics across 37 files. Review output
 Chris preferred the reduced First Nations emphasis but identified an awkward alignment in the services section. The recovery heading, explanatory copy and link now stack along the same left edge. The First Nations note follows at the same reading width, separated by a subtle rule. This replaces the recovery section's split desktop columns; mobile follows the same reading order. Content and publication controls are unchanged.
 
 The alignment revision passed the explicit review build and its 19 HTML-file / 585 local-reference output checks. Hosted visual acceptance of the revised spacing remains pending.
+
+## Case evidence clarification - 22 October 2026
+
+Following the independent review of 7cce3f3, Chris supplied two concrete examples of what the work made possible. The fibre framework brought go-to-market planning earlier into the decision chain, allowing commercial requirements to influence engineering and construction planning and coordinate with marketing and sales planning. The workforce R solution enabled first-wave participation reporting and supplied inputs to forecasting models used to identify expected problem areas and begin planning responses.
+
+The case summaries and result sections now describe these uses. The workforce account does not claim that Chris authored the downstream forecasting models, that reporting increased participation or that the intervention recovered the whole implementation. Chris's comparative description of the highest first-wave participation remains outside public copy until its comparison basis is established. The fibre account makes no claim about revenue, full-chain production adoption or the venture's ultimate commercial outcome. Both entries retain review status and prior-experience attribution.

@@ -1,6 +1,6 @@
 ---
 title: Recovering reporting in a constrained implementation
-summary: Making a difficult vendor data extract usable for essential workforce reporting when an urgent implementation had to proceed within existing software constraints.
+summary: Recovering vendor data for first-wave participation reporting and workforce forecasting during a constrained software implementation.
 organization: Major provincial health organization
 attribution: Chris McLean's prior professional experience
 status: review
@@ -29,7 +29,9 @@ That work made the vendor extract usable for the reporting task. The data team's
 
 ## The result
 
-The processing solution produced the answers the organization needed despite the limitations of the vendor's reporting and the available extract. It provided a practical response within an urgent implementation whose technology constraints could not readily be changed.
+The processing solution made it possible to report on participation in the first wave of vacation planning. It also supplied data to workforce forecasting models, helping the organization identify expected pressure points and begin planning responses.
+
+This recovered information the organization needed for both implementation reporting and proactive workforce planning within the existing software constraints.
 
 [Explore operations and capability](/advisory#operations-and-capability)  
 [Discuss initiative recovery](/advisory#when-an-initiative-has-stalled)
