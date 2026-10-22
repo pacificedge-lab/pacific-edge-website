@@ -98,3 +98,27 @@ test('non-form requests are passed to static assets',async()=>{
  let path;const env={ASSETS:{fetch:async request=>{path=new URL(request.url).pathname;return new Response('asset');}}};
  assert.equal(await(await worker.fetch(new Request(origin+'/about'),env)).text(),'asset');assert.equal(path,'/about');
 });
+
+test('direct contact-handler checks identify missing configuration without external calls or private values',async()=>{
+ const cases=[[{SITE_ORIGIN:''},'PE01'],[{CONTACT_FORM_ENABLED:'false'},'PE02'],[{TURNSTILE_SECRET_KEY:''},'PE03'],[{CONTACT_EMAIL:undefined},'PE04'],[{CONTACT_LIMITER:undefined},'PE05']];
+ for(const [overrides,code] of cases){
+  const h=harness(overrides);
+  const r=await handleContact(new Request(origin+'/api/contact'),h.env,h.fetchImpl);
+  assert.equal(r.status,405);assert.equal(r.headers.get('allow'),'POST');
+  const html=await r.text();assert(html.includes(code));assert(!html.includes('synthetic-secret'));
+  assert.equal(h.sent.length,0);assert.equal(h.verified.length,0);
+ }
+});
+
+test('runtime failures have distinct references and cannot send an email',async()=>{
+ const scenarios=[
+  {h:harness(),headers:{'CF-Connecting-IP':''},code:'PE06'},
+  {h:harness({CONTACT_LIMITER:{limit:async()=>{throw Error('synthetic-secret');}}}),code:'PE07'},
+  {h:harness(),fetchImpl:async()=>new Response('',{status:503}),code:'PE08'},
+  {h:harness(),fetchImpl:async()=>{throw Error('synthetic-secret');},code:'PE09'},
+ ];
+ for(const {h,headers,code,fetchImpl} of scenarios){
+  const r=await handleContact(request({},headers),h.env,fetchImpl||h.fetchImpl);
+  assert.equal(r.status,503);const body=await r.text();assert(body.includes(code));assert(!body.includes('synthetic-secret'));assert.equal(h.sent.length,0);
+ }
+});

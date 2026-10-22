@@ -10,6 +10,19 @@ const messages = {
   uncertain: 'We could not confirm submission. Your message has been kept on this page. Please email hello@thepacificedge.ca before trying again.',
 };
 
+function configurationIssue(env) {
+  try { new URL(env.SITE_ORIGIN); } catch { return 'PE01'; }
+  if (env.CONTACT_FORM_ENABLED !== 'true') return 'PE02';
+  if (!env.TURNSTILE_SECRET_KEY) return 'PE03';
+  if (typeof env.CONTACT_EMAIL?.send !== 'function') return 'PE04';
+  if (typeof env.CONTACT_LIMITER?.limit !== 'function') return 'PE05';
+  return null;
+}
+
+function unavailable(request, code) {
+  return response(request, 503, `${messages.unavailable} Reference: ${code}.`);
+}
+
 function response(request, status, message, ok = false) {
   const headers = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', Vary: 'Accept' };
   if (request.headers.get('accept')?.includes('application/json')) {
@@ -43,23 +56,23 @@ async function readBody(request) {
 
 export async function handleContact(request, env, fetchImpl = fetch) {
   if (request.method !== 'POST') {
-    const result = response(request, 405, 'Please use the contact form to submit an enquiry.');
+    const issue = configurationIssue(env);
+    const result = response(request, 405, 'Please use the contact form to submit an enquiry. ' + (issue ? `Configuration reference: ${issue}.` : 'Configuration checks passed.'));
     result.headers.set('Allow', 'POST');
     return result;
   }
   let origin;
-  try { origin = new URL(env.SITE_ORIGIN).origin; } catch { return response(request, 503, messages.unavailable); }
+  try { origin = new URL(env.SITE_ORIGIN).origin; } catch { return unavailable(request, 'PE01'); }
   if (new URL(request.url).origin !== origin || request.headers.get('origin') !== origin) {
     return response(request, 403, 'Please submit the enquiry from the Pacific Edge website.');
   }
-  if (env.CONTACT_FORM_ENABLED !== 'true' || !env.TURNSTILE_SECRET_KEY || !env.CONTACT_EMAIL?.send || !env.CONTACT_LIMITER?.limit) {
-    return response(request, 503, messages.unavailable);
-  }
+  const issue = configurationIssue(env);
+  if (issue) return unavailable(request, issue);
   if (request.headers.get('content-type')?.split(';')[0].trim() !== 'application/x-www-form-urlencoded') {
     return response(request, 415, messages.invalid);
   }
   const ip = request.headers.get('CF-Connecting-IP');
-  if (!ip) return response(request, 503, messages.unavailable);
+  if (!ip) return unavailable(request, 'PE06');
   try {
     const limit = await env.CONTACT_LIMITER.limit({ key: `contact:${ip}` });
     if (!limit.success) {
@@ -67,7 +80,7 @@ export async function handleContact(request, env, fetchImpl = fetch) {
       result.headers.set('Retry-After', '60');
       return result;
     }
-  } catch { return response(request, 503, messages.unavailable); }
+  } catch { return unavailable(request, 'PE07'); }
   let params;
   try { params = new URLSearchParams(await readBody(request)); }
   catch { return response(request, 413, 'Please shorten your enquiry and try again.'); }
@@ -94,12 +107,12 @@ export async function handleContact(request, env, fetchImpl = fetch) {
       body: JSON.stringify({ secret: env.TURNSTILE_SECRET_KEY, response: token }),
       signal: AbortSignal.timeout(8000),
     });
-    if (!verificationResponse.ok) return response(request, 503, messages.unavailable);
+    if (!verificationResponse.ok) return unavailable(request, 'PE08');
     const verification = await verificationResponse.json();
     if (verification.success !== true || verification.hostname !== new URL(origin).hostname || verification.action !== 'contact') {
       return response(request, 400, messages.verification);
     }
-  } catch { return response(request, 503, messages.unavailable); }
+  } catch { return unavailable(request, 'PE09'); }
   try {
     const result = await env.CONTACT_EMAIL.send({
       to: MAILBOX,

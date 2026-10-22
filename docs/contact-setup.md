@@ -1,5 +1,7 @@
 # Contact form setup
 
+Current production status, 22 October: PR #5 was merged as d76584f and its Cloudflare production build succeeded. Chris reported saving the production secret and attached thepacificedge.ca as a Production custom domain after removing the two conflicting apex A records. His production-origin form attempt still returned the pre-send unavailable message. Production delivery is not accepted yet. The references below support a no-submission check without exposing credentials.
+
 The public mailbox is hello@thepacificedge.ca. Chris confirmed that it is operational on 18 October 2026. The website implementation uses a Cloudflare Worker at /api/contact, native email sending, Turnstile and a rate-limiting binding. On 22 October, Chris reported a successful protected Preview submission and explicitly confirmed receipt at hello@ and that Reply targets the entered visitor address. Production source activation is prepared; the production runtime secret, merge, domain connection and public acceptance remain pending.
 
 On 22 October, Chris verified hello@thepacificedge.ca as a Cloudflare destination and subsequently confirmed access to paid Email Sending. Apex sending-domain onboarding proposed changing the existing DMARC policy, so the selected sending domain is forms.thepacificedge.ca. Chris's revised DNS review lists MX and SPF at cf-bounce.forms.thepacificedge.ca, DKIM at cf-bounce._domainkey.forms.thepacificedge.ca and DMARC at _dmarc.forms.thepacificedge.ca. His subsequent dashboard capture reports Sending status Enabled and DNS records Configured. Independent DNS reads confirm the subdomain bounce MX and DMARC records, while the apex Google Workspace MX and original quarantine DMARC policy remain unchanged. The local Worker now sends from website@forms.thepacificedge.ca to hello@thepacificedge.ca; all 18 simulated contact-handler tests pass. The protected Preview delivery and Reply-To checks were subsequently accepted by Chris; production setup remains pending.
@@ -90,3 +92,21 @@ Local validation of build:review started with conflicting SITE_REVIEW=false and 
 After saving the build settings, build feature/coastal-editorial-site and verify that the build reports that branch and the expected commit, runs the Preview command, and emits the Coastal Editorial routes including advisory, ai, first-nations and privacy. Open the returned Preview URL in a fresh private browser session to verify the login gate, then sign in and inspect the site. Contact fields must remain disabled with the review explanation visible. Do not connect the public domain or activate email delivery as part of this review.
 
 The previews configuration follows https://developers.cloudflare.com/workers/previews/configuration/ and https://developers.cloudflare.com/workers/ci-cd/builds/build-branches/ . Hosted acceptance remains required; local Astro and output checks do not validate Cloudflare provisioning or Access policy enforcement.
+
+## Production unavailable-message diagnosis
+
+GET /api/contact remains a 405 response with Allow: POST. It now reports either a fixed configuration reference or that the basic configuration checks passed. It reads no submitted values and makes no connector, verification or email calls. Passing this check establishes presence of required configuration and methods only; it does not prove credentials are valid, rate limiting works, Turnstile validates or email is delivered.
+
+| Reference | Meaning |
+| --- | --- |
+| PE01 | SITE_ORIGIN is missing or invalid |
+| PE02 | Runtime CONTACT_FORM_ENABLED is not true |
+| PE03 | Runtime TURNSTILE_SECRET_KEY is absent |
+| PE04 | CONTACT_EMAIL send method is absent |
+| PE05 | CONTACT_LIMITER limit method is absent |
+| PE06 | Request lacks CF-Connecting-IP |
+| PE07 | Rate-limit service call failed |
+| PE08 | Turnstile verification service returned a non-success HTTP response |
+| PE09 | Verification request or response parsing failed |
+
+Unavailable POST responses include these fixed references. No secret value, visitor input, IP address, token or raw provider error is returned or logged. The original production cause has not yet been identified; do not infer it solely from the successful preview-secret repair. Chris's widget success display does not independently establish server-side verification. No retry has been requested while the diagnostic deployment is prepared.
