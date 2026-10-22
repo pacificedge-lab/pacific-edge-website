@@ -77,6 +77,12 @@ if(contactTest){
  assert(!contact.includes('src="https://challenges.cloudflare.com/turnstile/'),'review must not load the live verification widget');
  assert(!home.includes('data-case-placeholder'),'supplied case accounts must replace homepage placeholders');
 }else{
+ const contact=fs.readFileSync(path.join(directory,'contact/index.html'),'utf8');
+ const form=contact.match(/<form\b[^>]*>/)?.[0];
+ assert(form&&form.includes('data-live="true"')&&form.includes('action="/api/contact"'),'production contact form must be enabled');
+ assert(contact.includes('src="https://challenges.cloudflare.com/turnstile/v0/api.js"'),'production contact form must load Turnstile');
+ assert(/data-sitekey="[^"]+"/.test(contact),'production contact form needs its sitekey');
+ assert(!contact.includes('Contact form test:'),'test notice leaked into production');
  for(const id of ['ai-readiness-operating-system','from-interest-to-capability','problem-beneath-workflow'])assert(!resolveRoute('/ideas/'+id),'draft idea was emitted: '+id);
  assert(!resolveRoute('/work/ai-operating-capability'),'archived work was emitted');
  assert(!resolveRoute('/labs/proposal-environment'),'archived internal portfolio was emitted');

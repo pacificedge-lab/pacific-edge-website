@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "build": "node scripts/build-production.mjs",
     "build:review": "node scripts/build-review.mjs",
     "build:contact-test": "node scripts/build-review.mjs --contact-test",
     "deploy:contact-test": "node scripts/deploy-contact-test.mjs",

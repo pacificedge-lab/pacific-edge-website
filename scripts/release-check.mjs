@@ -2,6 +2,7 @@ import fs from 'node:fs';
 if(fs.existsSync('.env'))process.loadEnvFile('.env');
 const failures=[];
 if(process.env.SITE_REVIEW==='true')failures.push('Review mode must be disabled for launch.');
+if(process.env.SITE_CONTACT_TEST==='true')failures.push('Contact test mode must be disabled for launch.');
 if((process.env.PUBLIC_CONTACT_EMAIL||'hello@thepacificedge.ca')!=='hello@thepacificedge.ca')failures.push('Use the confirmed public contact address.');
 if(process.env.PUBLIC_CONTACT_ENABLED!=='true')failures.push('Enable the form only after completing Cloudflare delivery acceptance.');
 const sitekey=process.env.PUBLIC_TURNSTILE_SITE_KEY||'';

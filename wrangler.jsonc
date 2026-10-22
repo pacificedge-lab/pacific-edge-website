@@ -10,7 +10,7 @@
   },
   "vars": {
     "SITE_ORIGIN": "https://thepacificedge.ca",
-    "CONTACT_FORM_ENABLED": "false"
+    "CONTACT_FORM_ENABLED": "true"
   },
   "send_email": [{
     "name": "CONTACT_EMAIL",
