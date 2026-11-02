@@ -33,7 +33,6 @@
 .education-contact p { color: var(--pe-mist); max-width: 520px; }
 .education-contact .education-split { align-items: center; }
 .education-contact h2 { margin: 0; }
-.education-email { display: block; width: fit-content; margin-top: 24px; font-size: .875rem; color: var(--pe-mist); }
 @media (max-width: 1000px) {
   .education-introduction, .education-split { gap: 48px; }
   .education-area { grid-template-columns: 28px 1fr 1fr; gap: 24px; }
