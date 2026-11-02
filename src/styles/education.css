@@ -1,56 +1,56 @@
-.education-page h1, .education-page h2, .education-page h3 { font-weight: 430; }
-.education-page h2 { font-size: clamp(2.4rem, 4.2vw, 4.1rem); line-height: 1.1; }
-.education-hero { padding-block: 170px 96px; }
-.education-hero h1 { font-size: clamp(2.8rem, 5.8vw, 5.6rem); line-height: 1.08; margin-block: 28px 56px; max-width: 1200px; }
-.education-introduction { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
-.education-proposition { font: 430 clamp(1.6rem, 2.3vw, 2.25rem)/1.4 var(--font-editorial); max-width: 510px; }
-.education-introduction > div > p { color: var(--pe-slate); margin-bottom: 28px; }
-.education-page .text-link { padding-block: 8px; }
-.education-page .text-link span { margin-left: 28px; }
-.education-support { padding-bottom: 96px; }
-.education-section-heading { border-top: 1px solid var(--pe-mist); padding-top: 40px; display: grid; grid-template-columns: 1fr 2fr; gap: 64px; margin-bottom: 40px; }
-.education-section-heading .eyebrow { padding-top: 8px; }
-.education-area { display: grid; grid-template-columns: 40px 1.4fr 1fr; gap: 40px; border-top: 1px solid var(--pe-mist); padding-block: 40px; }
-.education-number { color: var(--pe-oxide); font-size: .75rem; padding-top: 10px; }
-.education-area h3 { font-family: var(--font-editorial); font-size: clamp(1.7rem, 2.5vw, 2.35rem); line-height: 1.2; margin-bottom: 24px; }
-.education-area p:not(.eyebrow) { max-width: 60ch; color: var(--pe-slate); }
-.education-benefits { padding-left: 32px; border-left: 1px solid var(--pe-mist); }
-.education-benefits ul { padding-left: 20px; margin: 20px 0 0; color: var(--pe-slate); }
-.education-benefits li { line-height: 1.65; margin-bottom: 16px; padding-left: 6px; }
-.education-split { display: grid; grid-template-columns: 1fr 1.35fr; gap: 100px; }
-.education-example { background: var(--pe-abyss); color: var(--pe-mineral); padding-block: 96px; }
-.education-example .eyebrow, .education-example p { color: var(--pe-mist); }
-.education-example h2 { margin-top: 28px; }
-.education-lead { font: 430 clamp(1.4rem, 2vw, 1.8rem)/1.5 var(--font-editorial); }
-.education-development-note { border-top: 1px solid #586164; padding-top: 24px; margin-top: 32px; font-size: .9375rem; }
-.education-start { padding-block: 96px; }
-.education-start h2 { margin-top: 28px; }
-.education-start p:not(.eyebrow) { color: var(--pe-slate); }
-.education-review { padding-left: 24px; margin-block: 28px; }
-.education-review li { line-height: 1.65; margin-bottom: 20px; padding-left: 12px; }
-.education-review li::marker { color: var(--pe-oxide); }
-.education-contact { background: var(--pe-abyss); color: var(--pe-mineral); padding-block: 88px; }
-.education-contact p { color: var(--pe-mist); max-width: 520px; }
-.education-contact .education-split { align-items: center; }
-.education-contact h2 { margin: 0; }
-@media (max-width: 1000px) {
-  .education-introduction, .education-split { gap: 48px; }
-  .education-area { grid-template-columns: 28px 1fr 1fr; gap: 24px; }
-  .education-benefits { padding-left: 24px; }
+#pe-site .education-page .shell { padding-inline: clamp(23px, 5.1cqw, 66px); }
+#pe-site .education-page .eyebrow { font-size: 11px; line-height: 1.6; letter-spacing: .15em; text-transform: uppercase; font-weight: 500; }
+#pe-site .education-page h1, #pe-site .education-page h2, #pe-site .education-page h3 { font-weight: 430; }
+#pe-site .education-page h2 { font-size: clamp(2rem, 4.2cqw, 3.5rem); line-height: 1.1; }
+#pe-site .education-hero { padding-block: 80px 80px; }
+#pe-site .education-hero h1 { font-size: clamp(2.8rem, 5.8cqw, 5.6rem); line-height: 1.08; margin-block: 28px 56px; max-width: 1200px; }
+#pe-site .education-introduction { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+#pe-site .education-page .education-proposition { font: 430 clamp(1.6rem, 2.3cqw, 2.25rem)/1.4 'Source Serif 4 Variable', Georgia, serif; max-width: 510px; }
+#pe-site .education-introduction > div > p { color: var(--pe-secondary); margin-bottom: 28px; }
+#pe-site .education-page .text-link { display: inline-flex; align-items: center; gap: 28px; min-height: 44px; padding-block: 8px; border-bottom: 1px solid currentColor; font-size: 13px; text-decoration: none; }
+#pe-site .education-page .text-link:hover { text-decoration: underline; }
+#pe-site .education-support { padding-bottom: 80px; }
+#pe-site .education-section-heading { border-top: 1px solid var(--pe-line); padding-top: 40px; display: grid; grid-template-columns: 1fr 2fr; gap: 64px; margin-bottom: 40px; }
+#pe-site .education-section-heading .eyebrow { padding-top: 8px; }
+#pe-site .education-area { display: grid; grid-template-columns: 40px 1.4fr 1fr; gap: 40px; border-top: 1px solid var(--pe-line); padding-block: 40px; }
+#pe-site .education-number { color: var(--pe-ocean); font-size: .75rem; padding-top: 10px; }
+#pe-site .education-area h3 { font-size: clamp(1.7rem, 2.5cqw, 2.35rem); line-height: 1.2; margin-bottom: 24px; }
+#pe-site .education-area p:not(.eyebrow) { max-width: 60ch; color: var(--pe-secondary); }
+#pe-site .education-benefits { padding-left: 32px; border-left: 1px solid var(--pe-line); }
+#pe-site .education-benefits ul { padding-left: 20px; margin: 20px 0 0; color: var(--pe-secondary); }
+#pe-site .education-benefits li { line-height: 1.65; margin-bottom: 16px; padding-left: 6px; font-size: 15px; }
+#pe-site .education-split { display: grid; grid-template-columns: 1fr 1.35fr; gap: 80px; }
+#pe-site .education-example { background: var(--pe-fjord); color: var(--pe-paper); padding-block: 80px; }
+#pe-site .education-example .eyebrow, #pe-site .education-example p { color: var(--pe-mist); }
+#pe-site .education-example h2, #pe-site .education-start h2 { margin-top: 28px; }
+#pe-site .education-page .education-lead { font: 430 clamp(1.4rem, 2cqw, 1.8rem)/1.5 'Source Serif 4 Variable', Georgia, serif; }
+#pe-site .education-split p + p { margin-top: 24px; }
+#pe-site .education-page .education-development-note { border-top: 1px solid #586164; padding-top: 24px; margin-top: 32px; font-size: 14px; }
+#pe-site .education-start { padding-block: 80px; }
+#pe-site .education-start p:not(.eyebrow) { color: var(--pe-secondary); }
+#pe-site .education-review { padding-left: 24px; margin-block: 28px; }
+#pe-site .education-review li { line-height: 1.65; margin-bottom: 20px; padding-left: 12px; font-size: 15px; }
+#pe-site .education-review li::marker { color: var(--pe-ocean); }
+#pe-site .education-contact { background: var(--pe-ink); color: var(--pe-paper); padding-block: 80px; }
+#pe-site .education-contact p { color: var(--pe-mist); max-width: 520px; margin-bottom: 24px; }
+#pe-site .education-contact .education-split { align-items: center; }
+#pe-site .education-contact h2 { margin: 0; }
+@container pepage (max-width: 1000px) {
+  #pe-site .education-introduction, #pe-site .education-split { gap: 48px; }
+  #pe-site .education-area { grid-template-columns: 28px 1fr 1fr; gap: 24px; }
+  #pe-site .education-benefits { padding-left: 24px; }
 }
-@media (max-width: 700px) {
-  .education-hero { padding-block: 124px 56px; }
-  .education-hero h1 { font-size: clamp(2.5rem, 8.8vw, 3.8rem); margin-bottom: 32px; overflow-wrap: anywhere; }
-  .education-introduction, .education-split, .education-section-heading { grid-template-columns: 1fr; gap: 24px; }
-  .education-introduction p { margin-bottom: 0; }
-  .education-section-heading { margin-bottom: 16px; }
-  .education-section-heading h2 { margin-bottom: 20px; }
-  .education-area { grid-template-columns: 24px 1fr; gap: 16px; padding-block: 32px; }
-  .education-area h3 { font-size: 1.9rem; }
-  .education-benefits { grid-column: 2; border: 0; padding: 0; }
-  .education-benefits ul { margin-top: 12px; }
-  .education-support { padding-bottom: 32px; }
-  .education-example, .education-start, .education-contact { padding-block: 56px; }
-  .education-page h2 { font-size: 2.5rem; }
-  .education-example h2, .education-start h2 { margin-bottom: 0; }
+@container pepage (max-width: 700px) {
+  #pe-site .education-hero { padding-block: 48px 56px; }
+  #pe-site .education-hero h1 { font-size: clamp(2.5rem, 8.8cqw, 3.8rem); margin-bottom: 32px; overflow-wrap: anywhere; }
+  #pe-site .education-introduction, #pe-site .education-split, #pe-site .education-section-heading { grid-template-columns: 1fr; gap: 24px; }
+  #pe-site .education-section-heading { margin-bottom: 16px; }
+  #pe-site .education-section-heading h2 { margin-bottom: 20px; }
+  #pe-site .education-area { grid-template-columns: 24px 1fr; gap: 16px; padding-block: 32px; }
+  #pe-site .education-area h3 { font-size: 1.9rem; }
+  #pe-site .education-benefits { grid-column: 2; border: 0; padding: 0; }
+  #pe-site .education-benefits ul { margin-top: 12px; }
+  #pe-site .education-support { padding-bottom: 32px; }
+  #pe-site .education-example, #pe-site .education-start, #pe-site .education-contact { padding-block: 56px; }
+  #pe-site .education-page h2 { font-size: 2.5rem; }
 }
