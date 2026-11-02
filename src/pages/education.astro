@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/education.css';
+const areas = [
+  {
+    title: 'Workforce & HR operations',
+    summary: 'Clarify the work behind absence management, return to work, case coordination and workforce reporting. We help connect information, establish responsibilities and improve continuity. Workforce and succession planning can also help leaders understand capacity, anticipate gaps and set practical priorities.',
+    benefits: ['Clearer case ownership and more consistent follow-up', 'More useful information for workforce decisions', 'Stronger continuity when roles or staff change'],
+  },
+  {
+    title: 'Organizational & process improvement',
+    summary: 'Understand where work stalls, handoffs become difficult and administrative effort accumulates. We map current processes, clarify accountability and redesign how work moves across teams—with recommendations grounded in your district’s systems, capacity and operating context.',
+    benefits: ['Fewer avoidable handoffs and less rework', 'Clearer responsibilities and decision points', 'More consistent service delivery across teams'],
+  },
+  {
+    title: 'Technology, automation & AI',
+    summary: 'Identify where existing tools, practical automation or purpose-built applications can improve everyday work. Technology choices start with operational needs. AI opportunities are considered alongside privacy, reliability, human judgment and the capacity to maintain what is introduced.',
+    benefits: ['Less repetitive administrative effort', 'Better-informed technology and adoption priorities', 'Tools staff can use, understand and maintain'],
+  },
+];
+---
+<BaseLayout title="Education | Pacific Edge" description="Practical advisory, process improvement and technology for BC school districts. Better workforce systems and stronger district operations.">
+  <div class="education-page">
+    <section class="education-hero shell" aria-labelledby="education-title">
+      <p class="eyebrow">BC public education</p>
+      <h1 id="education-title">Better workforce systems.<br />Stronger district operations.</h1>
+      <div class="education-introduction"><p class="education-proposition">Practical advisory, process improvement and technology for BC school districts.</p><div><p>Pacific Edge helps districts improve how work gets done. We connect people, processes and information to reduce unnecessary effort, strengthen internal capability and support better decisions.</p><a class="text-link" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a></div></div>
+    </section>
+
+    <section class="education-support shell" aria-labelledby="support-title">
+      <div class="education-section-heading"><p class="eyebrow">Where we can help</p><h2 id="support-title">Make everyday work<br />work better.</h2></div>
+      <div class="education-areas">{areas.map((area, i) => <article class="education-area"><span class="education-number" aria-hidden="true">0{i + 1}</span><div><h3>{area.title}</h3><p>{area.summary}</p></div><div class="education-benefits"><p class="eyebrow">Potential benefits</p><ul>{area.benefits.map((benefit) => <li>{benefit}</li>)}</ul></div></article>)}</div>
+    </section>
+
+    <section class="education-example" aria-labelledby="example-title"><div class="shell education-split"><div><p class="eyebrow">In development / JEIS</p><h2 id="example-title">A clearer view<br />of case work.</h2></div><div><p class="education-lead">Joint Early Intervention Services depends on reliable case information, timely follow-up and coordination across people and processes.</p><p>Pacific Edge is developing a purpose-built case management application for a BC school district’s JEIS workflow. The focus is case visibility, follow-up coordination, administrative consistency and management oversight.</p><p>The intended benefits are clearer information, more reliable follow-up and less manual coordination: process design and practical technology working together.</p><p class="education-development-note">This is a development example. Operational outcomes remain to be validated. Applying the approach in another district would begin with its workflows, systems, privacy requirements and operating responsibilities.</p></div></div></section>
+
+    <section class="education-start shell" aria-labelledby="start-title"><div class="education-split"><div><p class="eyebrow">A focused place to start</p><h2 id="start-title">Start with one<br />difficult process.</h2></div><div><p class="education-lead">An engagement can begin with a review of one process that is taking more effort than it should.</p><p>Together, we establish how the work happens today, where effort or information is being lost, and which improvements are worth making. The review can provide:</p><ol class="education-review"><li>A shared picture of the workflow, responsibilities and systems involved.</li><li>Prioritized improvements, with dependencies and trade-offs made clear.</li><li>Agreed next steps, ownership and implementation considerations.</li></ol><p>Support can extend into process redesign, technology development or implementation. The aim throughout is to leave your team with usable tools, clearer processes and the knowledge to carry improvements forward.</p></div></div></section>
+
+    <section class="education-contact" aria-labelledby="education-contact-title"><div class="shell education-split"><h2 id="education-contact-title">What process is taking more effort than it should?</h2><div><p>Tell us what your team is managing, where the friction occurs and what you would like to work better. We can explore a useful starting point together.</p><a class="text-link" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a></div></div></section>
+  </div>
+</BaseLayout>
