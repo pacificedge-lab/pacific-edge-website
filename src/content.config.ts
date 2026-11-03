@@ -74,6 +74,6 @@ const people = defineCollection({
 
 const pages=defineCollection({
  loader:glob({pattern:'*.md',base:'./src/content/pages'}),
- schema:z.object({title:z.string(),heroTitle:z.string(),description:z.string(),lead:z.string(),eyebrow:z.string(),image:z.enum(['coast','cedar','water','infrastructure'])})
+ schema:z.object({title:z.string(),heroTitle:z.string(),description:z.string(),lead:z.string(),eyebrow:z.string(),image:z.enum(['coast','cedar','water','infrastructure','education-library'])})
 });
 export const collections = { work, labs, ideas, partners, people, pages };
