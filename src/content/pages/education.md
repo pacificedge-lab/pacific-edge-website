@@ -4,7 +4,7 @@ heroTitle: "Better workforce systems. Stronger district operations."
 description: "Practical advisory, process improvement and technology for BC school districts. Better workforce systems and stronger district operations."
 lead: "Practical advisory, process improvement and technology for BC school districts."
 eyebrow: "BC public education"
-image: "coast"
+image: "education-library"
 ---
 
 Pacific Edge helps districts improve how work gets done. We connect people, processes and information to reduce unnecessary effort, strengthen internal capability and support better decisions.
